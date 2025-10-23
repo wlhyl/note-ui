@@ -32,7 +32,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/prismjs/themes/prism-okaidia.css"
+              "node_modules/prismjs/themes/prism-okaidia.css",
+              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"
             ],
             "scripts": [
             "node_modules/prismjs/prism.js",
@@ -43,7 +44,8 @@
             "node_modules/prismjs/components/prism-sql.min.js",
             "node_modules/prismjs/components/prism-yaml.min.js",
             "node_modules/prismjs/components/prism-javascript.min.js",
-            "node_modules/prismjs/components/prism-typescript.min.js"
+            "node_modules/prismjs/components/prism-typescript.min.js",
+            "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
           ],
             "server": "src/main.server.ts",
             "outputMode": "server",
