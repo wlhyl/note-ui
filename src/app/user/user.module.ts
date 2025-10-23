@@ -12,8 +12,6 @@ import { UserRoutingModule } from './user-routing.module';
 
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
-// import { CommonModule as NoteCommonModule } from '../common/common.module';
-
 import { EditComponent } from './edit/edit.component';
 import { UserComponent } from './user/user.component';
 import { UserInfoComponent } from './user-info/user-info.component';
@@ -49,10 +47,10 @@ import { UploadComponent } from '../common/upload/upload.component';
     UserRoutingModule,
     FormsModule,
     NgbTooltipModule,
-    // NoteCommonModule,
     AlertComponent,
     HeaderComponent,
-    ChipsComponent,UploadComponent,
+    ChipsComponent,
+    UploadComponent,
     CodeEditor,
   ],
 })

@@ -10,13 +10,15 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { interval, lastValueFrom } from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
-// import { ToastService } from 'src/app/services/toast/toast.service';
 import { Article, PatchArticle } from '../../types/article';
 import { Category, PatchCategory } from '../../types/category';
 import { PatchTag } from '../../types/tag';
 // import '@github/markdown-toolbar-element';
 
-// import { environment } from 'src/environments/environment';
+import { LanguageDescription } from '@codemirror/language';
+import { languages } from '@codemirror/language-data'; // 🎯 包含几十种常见语言定义
+import { markdown } from '@codemirror/lang-markdown';
+
 import { Alert } from '../../types/alert';
 
 import { AlertName as AlterEnum } from '../../enum/alert';
@@ -24,7 +26,7 @@ import { DocType } from '../../enum/doc-type';
 import { deepCopy } from '../../utils/object_utils';
 import { ConfigService } from '../../services/config/config.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ENV_CONFIG, EnvConfig } from '../../tokens/app-config.token';
+import { ENV_CONFIG } from '../../tokens/app-config.token';
 
 @Component({
   selector: 'app-edit',
@@ -37,6 +39,14 @@ export class EditComponent implements OnInit, OnDestroy {
   // public isFocus: boolean = false;
   private config = inject(ENV_CONFIG);
   public baseUrl = this.config.baseUrl;
+
+   supportedLanguages = [
+    LanguageDescription.of({
+      name: 'Markdown',
+      alias: ['md'],
+      load: async () => markdown({ codeLanguages: languages })  // ✅ 支持内嵌语言高亮
+    })
+  ];
 
   // get codeMirrorOptions() {
   //   const mode = 'markdown';

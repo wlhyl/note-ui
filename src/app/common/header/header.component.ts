@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api/api.service';
 import { AuthenticationInfoService } from '../../services/authentication/authentication-info.service';
 import { ConfigService } from '../../services/config/config.service';
 import { Alert } from '../../types/alert';
 import { AlertName as AlterEnum } from '../../enum/alert';
 import { AlertComponent } from '../alert/alert.component';
+import {
+  // NgbToastModule,
+  NgbDropdownModule,
+  // NgbTooltipModule,
+  // NgbAlertModule,
+  // NgbProgressbarModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [AlertComponent],
+  imports: [RouterModule, AlertComponent, NgbDropdownModule],
 })
 export class HeaderComponent implements OnInit {
   message: Array<Alert> = [];

@@ -138,7 +138,7 @@
       <!-- <textarea id="textarea_id" class="text-editor" (focus)="focus()" (blur)="blur()"
                 [(ngModel)]="article.body.content" cdkTextareaAutosize [cdkAutosizeMinRows]="6">
               </textarea> -->
-      <code-editor [(ngModel)]="article.body.content">
+      <code-editor [theme]="'dark'" [languages]="supportedLanguages" language="markdown" [(ngModel)]="article.body.content">
       </code-editor>
     </div>
     @if (preview) {
