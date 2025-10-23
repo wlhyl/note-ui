@@ -1,0 +1,38 @@
+// .box {
+//     display: flex;
+//     position: absolute;
+//     height: 100%;
+//     width: 100%;
+// }
+
+nav {
+    // position: absolute;
+    // width: 10%;
+    // height: 100%;
+
+    // .item {
+    // color: white;
+    // margin: 1em 0;
+    // padding: 10px;
+    // display: block;
+    // }
+
+    a {
+        color: white;
+        // width: 100%;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #28e;
+        }
+    }
+}
+
+// .right {
+//     // width: 90%;
+//     padding: 2em;
+// }
+
+.active {
+    background-color: #28e;
+}

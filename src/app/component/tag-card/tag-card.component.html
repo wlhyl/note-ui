@@ -1,0 +1,12 @@
+<div class="card mb-5">
+  <div class="card-body">
+    <h5 class="card-title"> 文章标签 </h5>
+    @for (tag of tags.data; track tag) {
+      <a routerLink="/blog/tags/names/{{tag}}" class="mx-1">{{ tag }}</a>
+    }
+    @if (page+1< tags.total_pages) {
+      <a class="mx-1" (click)="next()">更多</a>
+    }
+  </div>
+  <app-alert [(alerts)]="message"></app-alert>
+</div>

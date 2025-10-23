@@ -1,0 +1,67 @@
+<app-alert [(alerts)]="message"></app-alert>
+@if (article.id==0) {
+  <div class="card" aria-hidden="true">
+    <div class="card-body">
+      <h5 class="card-title placeholder-glow">
+        <span class="placeholder col-6"></span>
+      </h5>
+      <!-- <p class="card-text placeholder-glow">
+      <span class="placeholder col-7"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-6"></span>
+      <span class="placeholder col-8"></span>
+    </p> -->
+  </div>
+  <div class="card-footer text-muted">
+    <span class="placeholder col-8"></span>
+  </div>
+</div>
+<p class="card-text placeholder-glow">
+  <span class="placeholder col-7"></span>
+  <span class="placeholder col-4"></span>
+  <span class="placeholder col-4"></span>
+  <span class="placeholder col-6"></span>
+  <span class="placeholder col-8"></span>
+</p>
+} @else {
+  <div class="card mb-5">
+    <div class="card-body">
+      <h5 class="card-title" style="cursor: pointer;" (click)="reloadArticle(article.id)">
+        {{article.title}}
+      </h5>
+      <p class="card-text">{{article.summary}}</p>
+    </div>
+    <div class="card-footer text-muted">
+      <i class="bi bi-person-fill">{{article.author.nick}}</i>
+      <i class="bi bi-folder-fill ms-3">
+        <a routerLink="/blog/categories/names/{{article.category.name}}"
+        class="card-link">{{article.category.name}}</a>
+      </i>
+      <!-- <i class="bi bi-eye">{{article.view_counts}}</i> -->
+      <i class="bi bi-tags-fill ms-3 ms-3">
+        @for (tag of article.tags; track tag; let i = $index) {
+          <a routerLink="/blog/tags/names/{{tag.name}}" class="card-link ms-1">{{tag.name}}</a>
+          @if (i != article.tags.length-1) {
+            <span>、</span>
+          }
+        }
+      </i>
+      @if (user.isAuthenticated) {
+        <i class="bi bi-pencil-fill ms-3">
+          <a routerLink="/user/edit/{{article.id}}" class="card-link">编辑</a>
+        </i>
+      }
+      <i class="bi bi-clock ms-3 float-end">{{article.create_date}}</i>
+    </div>
+  </div>
+  <div style="background-color: white; padding: 2em;">
+    <!-- <markdown [data]="article.body.content"></markdown> -->
+    @if (article.body.doc_type=='Markdown') {
+      <markdown [data]="article.body.content"></markdown>
+    }
+    @if (article.body.doc_type=='Unknow') {
+      <div>{{article.body.content}}></div>
+    }
+  </div>
+}

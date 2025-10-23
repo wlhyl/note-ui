@@ -1,0 +1,32 @@
+<div class="card mb-5">
+  <div class="card-body">
+    <h5 class="card-title">
+      <a routerLink="/blog/articles/{{article.id}}">{{article.title}}</a>
+    </h5>
+    @if (article.weight>0) {
+      <span class="ms-1">置顶</span>
+    }
+    <i class="bi bi-eye float-end">{{article.view_counts}}</i>
+    <p class="card-text">{{article.summary}}</p>
+  </div>
+  <div class="card-footer text-muted">
+    <i class="bi bi-person-fill">{{article.author.nick}}</i>
+    <i class="bi bi-folder-fill ms-3">
+      <a routerLink="/blog/categories/names/{{article.category.name}}" class="card-link">{{article.category.name}}</a>
+    </i>
+    <i class="bi bi-tags-fill ms-3 ms-3">
+      @for (tag of article.tags; track tag; let i = $index) {
+        <a routerLink="/blog/tags/names/{{tag.name}}" class="card-link ms-1">{{tag.name}}</a>
+        @if (i != article.tags.length-1) {
+          <span>、</span>
+        }
+      }
+    </i>
+    @if (user.isAuthenticated && user.user.id===article.author.id) {
+      <i class="bi bi-pencil-fill ms-3">
+        <a routerLink="/user/edit/{{article.id}}" class="card-link">编辑</a>
+      </i>
+    }
+    <i class="bi bi-clock float-end">{{article.create_date}}</i>
+  </div>
+</div>

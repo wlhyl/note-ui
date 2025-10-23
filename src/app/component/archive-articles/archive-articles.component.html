@@ -1,0 +1,13 @@
+<div class="card mb-5">
+  <div class="card-body">
+    <h5 class="card-title">{{ year}}年{{month}}月</h5>
+    <p class="card-text">每月归档</p>
+
+  </div>
+</div>
+
+<app-alert [(alerts)]="message"></app-alert>
+
+@for (article of articles; track article) {
+  <app-article-card [article]="article"></app-article-card>
+}

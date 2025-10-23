@@ -1,0 +1,41 @@
+<app-alert [(alerts)]="message"></app-alert>
+@for (object of images.objects; track object) {
+  <div class="img-container">
+    <div class="mx-2 my-2" (click)="showImage(content, object)" placement="top"
+      ngbTooltip="最后修改时间：{{ object.last_modified }}">
+      <img [src]="images.base_url+'/'+object.key" />
+    </div>
+  </div>
+}
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="图片">图片</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('关闭')"></button>
+  </div>
+
+  <div class="modal-body">
+    <div>
+      <img [src]="images.base_url+'/'+imageObject.key" width="600em" />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    @if (deleteImageMessage) {
+      <div class="text-danger fs-6 text">{{ deleteImageMessage}}</div>
+    }
+    <button type="button" class="btn btn-outline-dark" [disabled]="deletingImage"
+      (click)="deleteImage(imageObject.key)">
+
+      @if (deletingImage) {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        删除...
+      } @else {
+        删除
+      }
+
+    </button>
+  </div>
+
+</ng-template>

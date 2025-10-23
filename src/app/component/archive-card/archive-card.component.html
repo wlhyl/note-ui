@@ -1,0 +1,16 @@
+<div class="card mb-5">
+  <div class="card-body">
+    <h5 class="card-title"> 文章归档</h5>
+    <i class="bi bi bi-caret-left page" (click)="previous()"></i>
+    <i class="bi bi-caret-right page" (click)="next()"></i>
+
+    @for (archive of archives; track archive) {
+      <a style="display: block;"
+        routerLink="/blog/archives/{{archive.year}}/{{archive.month}}" class="mx-1">
+        {{ archive.year }}年{{archive.month}}月({{archive.count}})
+      </a>
+    }
+    <!-- <a class="mx-1" *ngIf="page+1< total" routerLink="/blog/archives">下一页</a> -->
+  </div>
+  <app-alert [(alerts)]="message"></app-alert>
+</div>

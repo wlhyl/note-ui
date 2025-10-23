@@ -1,0 +1,27 @@
+<app-header class="fixed-top"></app-header>
+
+<div class="row mt-5"> </div>
+<div class="row mt-3"> </div>
+
+<div style="display: flex;">
+    <!-- <div class="text-bg-dark left">
+        <a routerLink="articles" class="item" routerLinkActive="active">文章</a>
+        <a routerLink="edit" class="item" routerLinkActive="active">写文章</a>
+        <a routerLink="userinfo" class="item" routerLinkActive="active">用户</a>
+    </div> -->
+    <div class="bg-dark" style="height: 100vh; width: 10%; position: fixed;">
+        <nav class="nav flex-column">
+            <a class="nav-link my-1" routerLink="articles" routerLinkActive="active" aria-current="文章">文章</a>
+            <a class="nav-link my-1" routerLink="categories" routerLinkActive="active" aria-current="文章分类">文章分类</a>
+            <a class="nav-link my-1" routerLink="tags" routerLinkActive="active" aria-current="文章标签">文章标签</a>
+            <a class="nav-link my-1" routerLink="images" routerLinkActive="active" aria-current="图片">图片</a>
+            <a class="nav-link my-1" routerLink="edit" routerLinkActive="active" aria-current="写文章">写文章</a>
+            <a class="nav-link my-1" routerLink="userinfo" routerLinkActive="active" aria-current="用户">用户</a>
+            <a class="nav-link my-1" routerLink="config" routerLinkActive="active" aria-current="配置">配置</a>
+        </nav>
+    </div>
+
+    <div style="margin-left: 10%; padding: 1em; width: 90%;">
+        <router-outlet></router-outlet>
+    </div>
+</div>

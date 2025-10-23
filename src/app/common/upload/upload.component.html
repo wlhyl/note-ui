@@ -1,0 +1,29 @@
+<input type="file" class="file-input" [accept]="requiredFileType" (change)="onFileSelected($event)" #fileUpload>
+
+
+<div>
+
+  <button class="btn btn-outline-secondary" (click)="fileUpload.click()">{{name}} </button>
+  {{fileName}}
+  @if (message) {
+    <p class="text-danger">{{message}}</p>
+  }
+
+  @if (uploadProgress) {
+    <ngb-progressbar type="primary" [value]="uploadProgress"></ngb-progressbar>
+  }
+
+  @if (uploadProgress) {
+    <i class="bi bi-file-x-fill" (click)="cancelUpload()"></i>
+  }
+</div>
+
+<!-- <div class="progress"> -->
+
+<!-- <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
+
+</mat-progress-bar>
+
+<mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon> -->
+
+<!-- </div> -->

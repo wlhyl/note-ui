@@ -1,0 +1,15 @@
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+
+    &:hover {
+        color: #28e;
+    }
+}
+
+
+
+.active {
+    color: #28e;
+}

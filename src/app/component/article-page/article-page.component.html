@@ -1,0 +1,39 @@
+@for (article of articles; track article) {
+  <app-article-card [article]="article"></app-article-card>
+}
+
+<!-- <nav aria-label="Page navigation example">
+<ul class="pagination justify-content-center">
+  <li class="page-item" *ngIf="page>0" (click)="previous()">
+    <a class="page-link" href="#" aria-label="Previous">
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  </li>
+  <li class="page-item" *ngFor="let item of [].constructor(end-start+1);index as i">
+    <a class="page-link active"  *ngIf="i!==page; else selected" (click)="toPage(i)">{{i+1}}</a>
+    <ng-template #selected>
+      <a class="page-link"  (click)="toPage(i)">{{i+1}}</a>                    </ng-template>
+    </li>
+    <li class="page-item" *ngIf="page<total-1" (click)="next()">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav> -->
+
+<div style="text-align: center;">
+  @if (page>0) {
+    <i class="bi bi-caret-left page" (click)="previous()"></i>
+  }
+  @for (item of [].constructor(end-start+1); track item; let i = $index) {
+    @if (i!==page) {
+      <span class="mx-2 page" (click)="toPage(i)">{{start + i}}</span>
+    } @else {
+      <span class="mx-2" (click)="toPage(i)">{{start + i}}</span>
+    }
+  }
+  @if (page<total-1) {
+    <i class="bi bi-caret-right page" (click)="next()"></i>
+  }
+</div>

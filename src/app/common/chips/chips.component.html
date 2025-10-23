@@ -1,0 +1,8 @@
+@for (value of values; track value; let i = $index) {
+  <span class="roundedcorner">
+    {{value}}
+    <i class="bi bi-x" style="font-size:24px;color:red;" (click)="drop(i)"></i>
+  </span>
+}
+<input type="text" [placeholder]="placeholder" [(ngModel)]="value" (keyup.,)="onValueKeydown()"
+  (keydown.backspace)="remove()" />

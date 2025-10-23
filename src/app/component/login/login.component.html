@@ -1,0 +1,23 @@
+<div class="login">
+  <div class="login-box login-box-radius">
+    <h1 class="mb-3">武陵荒草 登录</h1>
+
+    <form class="was">
+      <input type="text" class="form-control my-2" placeholder="用户名" [(ngModel)]="account" name="account" />
+      @if (accountError) {
+        <div class="error"> {{accountError}} </div>
+      }
+
+      <input type="password" class="form-control my-2" placeholder="密码" [(ngModel)]="password" name="password" />
+      @if (passwordError) {
+        <div class="error"> {{passwordError}} </div>
+      }
+      <div class="my-2">
+        <button type="submit" class="btn btn-primary login-button" (click)="login()">登录</button>
+      </div>
+
+
+    </form>
+    <app-alert [(alerts)]="message"></app-alert>
+  </div>
+</div>

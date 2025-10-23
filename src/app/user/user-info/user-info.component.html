@@ -1,0 +1,45 @@
+<app-alert [(alerts)]="message"></app-alert>
+<div class="container">
+  <div class="row my-2">
+    <div class="col-2">账号</div>
+    <div class="col-4">
+      <input type="text" class="form-control" [(ngModel)]="user.account" name="account" disabled="" />
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-2">呢称</div>
+    <div class="col-4">
+      <input type="text" class="form-control" [(ngModel)]="user.nick" name="nick" />
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-2">旧密码</div>
+    <div class="col-4">
+      <input type="password" class="form-control" [(ngModel)]="oldPassword" name="password" />
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-2">密码</div>
+    <div class="col-4">
+      <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-2">确认密码</div>
+    <div class="col-4">
+      <input type="password" class="form-control" [(ngModel)]="repeatPassword" name="password" />
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary login-button" (click)="updateUser()" [disabled]="updating">
+        @if (updating) {
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          更新...
+        } @else {
+          <span>更新用户资料</span>
+        }
+      </button>
+    </div>
+  </div>
+</div>

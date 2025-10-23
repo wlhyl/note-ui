@@ -1,0 +1,35 @@
+<app-alert [(alerts)]="message"></app-alert>
+<div class="container">
+  <div class="row my-2">
+    <h1>站点配置</h1>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">站点名称</div>
+    <div class="col-4">
+      <input type="text" class="form-control" [(ngModel)]="config.site_name" name="site_name" />
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">自动保存间隔（单位：秒）</div>
+    <div class="col-4">
+      <input type="number" min="3" class="form-control" [(ngModel)]="config.auto_save_interval"
+        name="auto_save_interval" />
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary login-button" (click)="save()" [disabled]="saving">
+        @if (saving) {
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          保存中...
+        } @else {
+          <span>保存</span>
+        }
+      </button>
+    </div>
+  </div>
+
+</div>

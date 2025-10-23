@@ -1,0 +1,14 @@
+<div class="card mb-5">
+  <div class="card-body">
+    <h5 class="card-title"> 文章分类 </h5>
+    @for (category of categories; track category) {
+      <a routerLink="/blog/categories/names/{{category}}" class="mx-1">
+        {{ category }}
+      </a>
+    }
+    @if (page+1< total) {
+      <a class="mx-1" (click)="next()">更多</a>
+    }
+  </div>
+</div>
+<app-alert [(alerts)]="message"></app-alert>

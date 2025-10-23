@@ -1,0 +1,96 @@
+<app-alert [(alerts)]="message"></app-alert>
+
+<div class="container">
+  <h6>
+    @if (category.id==0) {
+      添加文章分类
+    } @else {
+      更新文章分类
+    }
+
+  </h6>
+  <div class="row my-2">
+    <div class="col-2">名称</div>
+    <div class="col-4">
+      <input type="text" class="form-control" [(ngModel)]="category.name" name="name" />
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-2">描述</div>
+    <div class="col-4">
+      <input type="text" class="form-control" [(ngModel)]="category.description" name="nick" />
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="saving">
+        @if (saving) {
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          保存...
+        } @else {
+          <span>保存</span>
+        }
+      </button>
+
+      <button type="submit" class="btn btn-warning mx-1" (click)="cancel()" [disabled]="saving">
+        取消
+      </button>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">名称</th>
+      <th scope="col">描述</th>
+      <th scope="col">文章总数</th>
+      <th scope="col">已删除文章</th>
+      <th scope="col">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (category of categories; track category) {
+      <tr>
+        <td>
+          <span class="edit" (click)="edit(category.category.id)"> {{category.category.name}}</span>
+        </td>
+        @if (category.category.description) {
+          <td>{{category.category.description}}</td>
+        } @else {
+          <td>-</td>
+        }
+        <td>
+          @if (category.total!==null) {
+            {{category.total}}
+          } @else {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          }
+        </td>
+        <td>
+          @if (category.deletedTotal!==null) {
+            {{category.deletedTotal}}
+          } @else {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          }
+        </td>
+        <td>
+          @if (deleting==category.category.id) {
+            <span style="color: #b32d2e;">删除中...</span>
+          }
+          @if (deleting==0) {
+            <span class="edit" style="color: #b32d2e;"
+            (click)="delete(category.category.id)">删除</span>
+          }
+          @if (deleting>0 && deleting!=category.category.id) {
+            <span style="color: #b32d2e;">等待其任务完成</span>
+          }
+        </td>
+      </tr>
+    }
+
+  </tbody>
+</table>
+
+

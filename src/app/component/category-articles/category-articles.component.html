@@ -1,0 +1,12 @@
+<div class="card mb-5">
+    <div class="card-body">
+        <h5 class="card-title">分类：{{categoryName}}</h5>
+        <!-- <p class="card-text" *ngIf="category.description">{{category.description}}</p> -->
+    </div>
+    <!-- <div class="card-footer text-muted">
+        <i class="bi bi-person-fill"></i>{{category.user.nick}}
+    </div> -->
+</div>
+<app-alert [(alerts)]="message"></app-alert>
+<app-article-page [articles]="articles" [total]="total" [page]="page" (pageChange)="pageChange($event)">
+</app-article-page>
