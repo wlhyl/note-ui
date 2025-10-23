@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { ApiService } from 'src/app/services/api/api.service';
-import { ConfigService } from 'src/app/services/config/config.service';
-import { Alert } from 'src/app/types/alert';
-import { Config, ConfigResponse } from 'src/app/types/config';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { ConfigService } from '../../services/config/config.service';
+import { Alert } from '../../types/alert';
+import { Config, ConfigResponse } from '../../types/config';
 
 @Component({
     selector: 'app-config',

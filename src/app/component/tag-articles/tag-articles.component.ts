@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { ApiService } from 'src/app/services/api/api.service';
-import { ArticlePreview } from 'src/app/types/article';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { ArticlePreview } from '../../types/article';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+
+import { AlertComponent } from '../../common/alert/alert.component'
+
+import { ArticlePageComponent } from '../article-page/article-page.component';
 
 @Component({
     selector: 'app-tag',
     templateUrl: './tag-articles.component.html',
     styleUrls: ['./tag-articles.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [AlertComponent,ArticlePageComponent]
 })
 export class TagArticlesComponent implements OnInit {
   public page = 0;

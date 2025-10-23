@@ -1,17 +1,19 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AuthenticationInfoService } from '../authentication/authentication-info.service';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { PageResponser } from 'src/app/types/page';
-import { ArticlePreview } from 'src/app/types/article';
-import { PatchTag, Tag } from 'src/app/types/tag';
+import { PageResponser } from '../../types/page';
+import { ArticlePreview } from '../../types/article';
+import { PatchTag, Tag } from '../../types/tag';
+import { ENV_CONFIG } from '../../tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TagApiService {
-  private readonly url = `${environment.base_url}/api`;
+  private env = inject(ENV_CONFIG);
+  private readonly url = `${this.env.baseUrl}/api`;
   private readonly http_options = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };

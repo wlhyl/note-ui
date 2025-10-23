@@ -7,13 +7,16 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { ArticlePreview } from 'src/app/types/article';
+import { ArticlePreview } from '../../types/article';
+
+import { ArticleCardComponent } from '..//article-card/article-card.component';
 
 @Component({
     selector: 'app-article-page',
     templateUrl: './article-page.component.html',
     styleUrls: ['./article-page.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [ArticleCardComponent],
 })
 export class ArticlePageComponent implements OnInit, OnChanges {
   @Input()

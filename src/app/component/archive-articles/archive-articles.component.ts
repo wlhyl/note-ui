@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { ArticlePreview } from 'src/app/types/article';
+import { ApiService } from '../../services/api/api.service';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { ArticlePreview } from '../../types/article';
+import { AlertComponent } from '../../common/alert/alert.component';
+
+import { ArticleCardComponent } from '../article-card/article-card.component';
 
 @Component({
-    selector: 'app-archive-articles',
-    templateUrl: './archive-articles.component.html',
-    styleUrls: ['./archive-articles.component.scss'],
-    standalone: false
+  selector: 'app-archive-articles',
+  templateUrl: './archive-articles.component.html',
+  styleUrls: ['./archive-articles.component.scss'],
+  standalone: true,
+  imports: [AlertComponent, ArticleCardComponent],
 })
 export class ArchiveArticlesComponent implements OnInit {
   public articles: Array<ArticlePreview> = [];

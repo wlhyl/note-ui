@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/types/user';
+import { User } from '../../types/user';
 
 // cookie
 import { SsrCookieService } from 'ngx-cookie-service-ssr';

@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { DocType } from 'src/app/enum/doc-type';
-import { ApiService } from 'src/app/services/api/api.service';
-import { AuthenticationInfoService } from 'src/app/services/authentication/authentication-info.service';
-import { Article } from 'src/app/types/article';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
+import { DocType } from '../../enum/doc-type';
+import { ApiService } from '../../services/api/api.service';
+import { AuthenticationInfoService } from '../../services/authentication/authentication-info.service';
+import { Article } from '../../types/article';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+
+import { AlertComponent } from '../../common/alert/alert.component';
+import { RouterModule } from '@angular/router';
+
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
     selector: 'app-article',
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [AlertComponent, RouterModule, MarkdownModule],
 })
 export class ArticleComponent implements OnInit {
   public article: Article = {

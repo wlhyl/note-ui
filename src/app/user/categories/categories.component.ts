@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Category, PatchCategory } from 'src/app/types/category';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { Category, PatchCategory } from '../../types/category';
 
 @Component({
     selector: 'app-categories',

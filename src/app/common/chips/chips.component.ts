@@ -1,15 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+
 @Component({
-    selector: 'app-chips',
-    templateUrl: './chips.component.html',
-    styleUrls: ['./chips.component.scss'],
-    standalone: false
+  selector: 'app-chips',
+  templateUrl: './chips.component.html',
+  styleUrls: ['./chips.component.scss'],
+  standalone: true,
+  imports: [FormsModule],
 })
 export class ChipsComponent implements OnInit {
   @Input()
-  placeholder="Enter text and hit ',' Key."
-  
+  placeholder = "Enter text and hit ',' Key.";
+
   @Input()
   values: Array<string> = [];
 

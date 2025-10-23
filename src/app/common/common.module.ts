@@ -13,17 +13,17 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 
 import { HeaderComponent } from './header/header.component';
-import { AlertComponent } from './alert/alert.component';
+// import { AlertComponent } from './alert/alert.component';
 import { ChipsComponent } from './chips/chips.component';
 import { UploadComponent } from './upload/upload.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    AlertComponent,
-    ChipsComponent,
-    UploadComponent,
+    // HeaderComponent,
+    // AlertComponent,
+    // ChipsComponent,
+    // UploadComponent,
   ],
   imports: [
     AngularCommonModule,
@@ -37,10 +37,10 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports: [
     FormsModule,
-    HeaderComponent,
-    AlertComponent,
-    ChipsComponent,
-    UploadComponent,
+    // HeaderComponent,
+    // AlertComponent,
+    // ChipsComponent,
+    // UploadComponent,
     NgbTooltipModule,
   ],
 })

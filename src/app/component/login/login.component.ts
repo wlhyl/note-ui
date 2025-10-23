@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { ApiService } from 'src/app/services/api/api.service';
-import { AuthenticationInfoService } from 'src/app/services/authentication/authentication-info.service';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { AuthenticationInfoService } from '../../services/authentication/authentication-info.service';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { AlertComponent } from '../../common/alert/alert.component';
 
+import { FormsModule } from '@angular/forms';
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
-    standalone: false
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [AlertComponent, FormsModule],
 })
 export class LoginComponent implements OnInit {
   public account = '';
@@ -43,9 +46,7 @@ export class LoginComponent implements OnInit {
     // if (this.password.length >= 10) this.passwordError = '不能大于10个字符';
 
     try {
-      let token = await lastValueFrom(
-        this.api.user.login(this.account, this.password)
-      );
+      let token = await lastValueFrom(this.api.user.login(this.account, this.password));
       this.authenticationInfo.token = token.token;
     } catch (error) {
       this.message.push({

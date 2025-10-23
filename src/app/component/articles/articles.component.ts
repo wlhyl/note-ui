@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ApiService } from 'src/app/services/api/api.service';
-import { ArticlePreview } from 'src/app/types/article';
-import { PageResponser } from 'src/app/types/page';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { ArticlePreview } from '../../types/article';
+import { PageResponser } from '../../types/page';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+
+import { AlertComponent } from '../../common/alert/alert.component';
+
+import { ArticlePageComponent } from '../article-page/article-page.component';
 
 @Component({
-    selector: 'app-articles',
-    templateUrl: './articles.component.html',
-    styleUrls: ['./articles.component.scss'],
-    standalone: false
+  selector: 'app-articles',
+  templateUrl: './articles.component.html',
+  styleUrls: ['./articles.component.scss'],
+  standalone: true,
+  imports: [AlertComponent, ArticlePageComponent],
 })
 export class ArticlesComponent implements OnInit {
   private title = '所有文章';

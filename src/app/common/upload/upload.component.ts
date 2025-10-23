@@ -1,13 +1,21 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { finalize, Subscription } from 'rxjs';
-import { ApiService } from 'src/app/services/api/api.service';
+import { ApiService } from '../../services/api/api.service';
+import {
+  // NgbTooltipModule,
+  NgbProgressbarModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'app-upload',
-    templateUrl: './upload.component.html',
-    styleUrls: ['./upload.component.scss'],
-    standalone: false
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.scss'],
+  standalone: true,
+  imports: [
+    // NgbTooltipModule,
+    NgbProgressbarModule,
+  ],
 })
 export class UploadComponent implements OnInit {
   @Input() name: string = '文件上传';
@@ -40,16 +48,12 @@ export class UploadComponent implements OnInit {
     const formData = new FormData();
     formData.append('thumbnail', file);
 
-    const upload = this.api.image
-      .uploadImage(formData)
-      .pipe(finalize(() => this.reset()));
+    const upload = this.api.image.uploadImage(formData).pipe(finalize(() => this.reset()));
 
     this.uploadSub = upload.subscribe({
       next: (event) => {
         if (event.type == HttpEventType.UploadProgress) {
-          this.uploadProgress = Math.round(
-            100 * (event.loaded / event.total!!)
-          );
+          this.uploadProgress = Math.round(100 * (event.loaded / event.total!!));
         }
         if (event.type === HttpEventType.Response) {
           const filenames = event.body as Array<string>;

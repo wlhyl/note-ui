@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { PageResponser } from 'src/app/types/page';
+import { ApiService } from '../../services/api/api.service';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { PageResponser } from '../../types/page';
+
+import { RouterModule } from '@angular/router';
+
+import { AlertComponent } from '../../common/alert/alert.component';
 
 @Component({
-    selector: 'app-tag-card',
-    templateUrl: './tag-card.component.html',
-    styleUrls: ['./tag-card.component.scss'],
-    standalone: false
+  selector: 'app-tag-card',
+  templateUrl: './tag-card.component.html',
+  styleUrls: ['./tag-card.component.scss'],
+  standalone: true,
+  imports: [RouterModule, AlertComponent],
 })
 export class TagCardComponent implements OnInit {
   public tags: PageResponser<Array<string>> = {

@@ -1,12 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthenticationInfoService } from 'src/app/services/authentication/authentication-info.service';
-import { ArticlePreview } from 'src/app/types/article';
+import { AuthenticationInfoService } from '../..//services/authentication/authentication-info.service';
+import { ArticlePreview } from '../../types/article';
+
+import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-article-card',
-    templateUrl: './article-card.component.html',
-    styleUrls: ['./article-card.component.scss'],
-    standalone: false
+  selector: 'app-article-card',
+  templateUrl: './article-card.component.html',
+  styleUrls: ['./article-card.component.scss'],
+  standalone: true,
+  imports: [RouterModule],
 })
 export class ArticleCardComponent implements OnInit {
   @Input()

@@ -1,11 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Alert } from 'src/app/types/alert';
+import { Alert } from '../../types/alert';
+
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
     selector: 'app-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [NgbAlertModule],
 })
 export class AlertComponent implements OnInit {
   @Input()

@@ -1,15 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AuthenticationInfoService } from '../authentication/authentication-info.service';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { PatchUser, User } from 'src/app/types/user';
+import { PatchUser, User } from '../../types/user';
+import { ENV_CONFIG } from '../../tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserApiService {
-  private readonly url = `${environment.base_url}/api`;
+  private env = inject(ENV_CONFIG);
+  private readonly url = `${this.env.baseUrl}/api`;
   private readonly http_options = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };

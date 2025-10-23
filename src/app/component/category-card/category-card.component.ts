@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+
+import { RouterModule } from '@angular/router';
+import { AlertComponent } from '../../common/alert/alert.component';
+ 
 
 @Component({
     selector: 'app-category-card',
     templateUrl: './category-card.component.html',
     styleUrls: ['./category-card.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [RouterModule, AlertComponent],
 })
 export class CategoryCardComponent implements OnInit {
   public categories: Array<string> = [];

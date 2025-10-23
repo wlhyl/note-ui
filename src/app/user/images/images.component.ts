@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Alert } from 'src/app/types/alert';
-import { ImageObject, ImagesList } from 'src/app/types/image';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { Alert } from '../../types/alert';
+import { ImageObject, ImagesList } from '../../types/image';
 
 @Component({
     selector: 'app-images',

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api/api.service';
-import { AuthenticationInfoService } from 'src/app/services/authentication/authentication-info.service';
-import { PatchUser, User } from 'src/app/types/user';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { Alert } from 'src/app/types/alert';
+import { ApiService } from '../../services/api/api.service';
+import { AuthenticationInfoService } from '../../services/authentication/authentication-info.service';
+import { PatchUser, User } from '../../types/user';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { Alert } from '../../types/alert';
+
 @Component({
     selector: 'app-user-info',
     templateUrl: './user-info.component.html',

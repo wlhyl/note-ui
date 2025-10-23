@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Alert } from 'src/app/types/alert';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { PatchTag, Tag } from 'src/app/types/tag';
+import { ApiService } from '../../services/api/api.service';
+import { Alert } from '../../types/alert';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { PatchTag, Tag } from '../../types/tag';
 
 @Component({
     selector: 'app-tags',

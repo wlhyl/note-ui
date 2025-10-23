@@ -1,5 +1,6 @@
 import {
   Component,
+  inject,
   OnDestroy,
   // HostBinding,
   OnInit,
@@ -8,21 +9,22 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { interval, lastValueFrom } from 'rxjs';
-import { ApiService } from 'src/app/services/api/api.service';
+import { ApiService } from '../../services/api/api.service';
 // import { ToastService } from 'src/app/services/toast/toast.service';
-import { Article, PatchArticle } from 'src/app/types/article';
-import { Category, PatchCategory } from 'src/app/types/category';
-import { PatchTag } from 'src/app/types/tag';
+import { Article, PatchArticle } from '../../types/article';
+import { Category, PatchCategory } from '../../types/category';
+import { PatchTag } from '../../types/tag';
 // import '@github/markdown-toolbar-element';
 
-import { environment } from 'src/environments/environment';
-import { Alert } from 'src/app/types/alert';
+// import { environment } from 'src/environments/environment';
+import { Alert } from '../../types/alert';
 
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
-import { DocType } from 'src/app/enum/doc-type';
-import { deepCopy } from 'src/app/utils/object_utils';
-import { ConfigService } from 'src/app/services/config/config.service';
+import { AlertName as AlterEnum } from '../../enum/alert';
+import { DocType } from '../../enum/doc-type';
+import { deepCopy } from '../../utils/object_utils';
+import { ConfigService } from '../../services/config/config.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ENV_CONFIG, EnvConfig } from '../../tokens/app-config.token';
 
 @Component({
   selector: 'app-edit',
@@ -33,7 +35,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class EditComponent implements OnInit, OnDestroy {
   // @HostBinding('class.focus')
   // public isFocus: boolean = false;
-  public baseUrl = environment.base_url;
+  private config = inject(ENV_CONFIG);
+  public baseUrl = this.config.baseUrl;
 
   // get codeMirrorOptions() {
   //   const mode = 'markdown';
@@ -142,10 +145,7 @@ export class EditComponent implements OnInit, OnDestroy {
     }
 
     const oldTags = this.oldArticle.tags.map((t) => t.name);
-    if (
-      this.tags.filter((tag) => oldTags.includes(tag)).length !=
-      this.article.tags.length
-    ) {
+    if (this.tags.filter((tag) => oldTags.includes(tag)).length != this.article.tags.length) {
       return false;
     }
 
@@ -207,13 +207,13 @@ export class EditComponent implements OnInit, OnDestroy {
     // this.observableRef = interval(3000).subscribe(
     //   (x) => console.log(x) /* do something */
     // );
-    this.observableRef = interval(
-      this.configService.config.auto_save_interval * 1000
-    ).subscribe((x) => {
-      if (!this.isSaved && !this.saving && this.validateArticle().validated()) {
-        this.save();
+    this.observableRef = interval(this.configService.config.auto_save_interval * 1000).subscribe(
+      (x) => {
+        if (!this.isSaved && !this.saving && this.validateArticle().validated()) {
+          this.save();
+        }
       }
-    });
+    );
   }
   ngOnDestroy(): void {
     this.observableRef.unsubscribe();
@@ -242,9 +242,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   private async getArticle(id: number) {
     try {
-      this.article = await lastValueFrom(
-        this.api.article.getAnyArticleById(id)
-      );
+      this.article = await lastValueFrom(this.api.article.getAnyArticleById(id));
       this.oldArticle = deepCopy(this.article);
     } catch (error) {
       this.message.push({
@@ -263,9 +261,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   private async getCategories() {
     try {
-      this.categories = await lastValueFrom(
-        this.api.category.getCategoriesByUser()
-      );
+      this.categories = await lastValueFrom(this.api.category.getCategoriesByUser());
     } catch (error) {
       this.message.push({
         type: AlterEnum.DANGER,

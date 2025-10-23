@@ -1,11 +1,11 @@
 import { CanDeactivateFn } from '@angular/router';
-import { EditComponent } from 'src/app/user/edit/edit.component';
+import { EditComponent } from '../../user/edit/edit.component';
 
 export const editGuard: CanDeactivateFn<EditComponent> = (
   component,
-  currentRoute,
-  currentState,
-  nextState
+  // currentRoute,
+  // currentState,
+  // nextState
 ) => {
   if (component.isSaved) return true;
   component.showAlert();

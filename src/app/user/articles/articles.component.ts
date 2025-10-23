@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Alert } from 'src/app/types/alert';
-import { ArticlePreview } from 'src/app/types/article';
-import { AlertName as AlterEnum } from 'src/app/enum/alert';
+import { ApiService } from '../../services/api/api.service';
+import { Alert } from '../../types/alert';
+import { ArticlePreview } from '../../types/article';
+import { AlertName as AlterEnum } from '../../enum/alert';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
