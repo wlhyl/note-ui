@@ -41,3 +41,8 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# 自定义
+.angular
+*.bak
+package-lock.json

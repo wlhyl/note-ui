@@ -7,6 +7,7 @@ import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/c
 import { AuthenticationInfoService } from './services/authentication/authentication-info.service';
 import { ApiService } from './services/api/api.service';
 import { ConfigService } from './services/config/config.service';
+import { SsrDataService } from './services/ssr/ssr-data.service';
 import { appInit } from './services/init/app-init';
 import { ENV_CONFIG,envConfig } from './tokens/app-config.token';
 import { provideMarkdown } from 'ngx-markdown';
@@ -27,14 +28,16 @@ export const appConfig: ApplicationConfig = {
         (
           user: AuthenticationInfoService,
           api: ApiService,
-          config: ConfigService
+          config: ConfigService,
+          ssrDataService: SsrDataService
         ) =>
         () =>
-          appInit(user, api, config)
+          appInit(user, api, config, ssrDataService)
       )(
         inject(AuthenticationInfoService),
         inject(ApiService),
-        inject(ConfigService)
+        inject(ConfigService),
+        inject(SsrDataService)
       );
       return initializerFn();
     }),
