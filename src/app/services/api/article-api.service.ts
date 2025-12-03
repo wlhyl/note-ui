@@ -45,6 +45,31 @@ export class ArticleApiService {
   }
 
   /**
+   * 搜索文章
+   * @param page 页数
+   * @param size 每页大小
+   * @param keyword 搜索关键词
+   * @returns
+   */
+  public searchArticles(
+    page: number,
+    size: number,
+    keyword: string
+  ): Observable<PageResponser<Array<ArticlePreview>>> {
+    const params = `page=${page}&size=${size}&keyword=${encodeURIComponent(keyword)}`;
+    if (this.user.isAuthenticated) {
+      return this.http.get<PageResponser<Array<ArticlePreview>>>(
+        `${this.url}/any/articles/search?${params}`,
+        { headers: { token: this.user.token } }
+      );
+    } else {
+      return this.http.get<PageResponser<Array<ArticlePreview>>>(
+        `${this.url}/any/articles/search?${params}`
+      );
+    }
+  }
+
+  /**
    * 获取文章，包含文章的内容
    * @param id 文章id
    * @returns

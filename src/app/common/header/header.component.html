@@ -22,9 +22,9 @@
   }
 </ul>
 
-<form class="col-2 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-  <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
-    aria-label="Search">
+<form class="col-2 col-lg-auto mb-3 mb-lg-0 me-lg-3" (ngSubmit)="onSearch()" role="search">
+  <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="搜索文章..."
+    aria-label="Search" [(ngModel)]="searchKeyword" name="searchKeyword" (keydown)="onSearchKeyDown($event)">
 </form>
 
 <div class="text-end col-2">
@@ -54,8 +54,6 @@
   }
   <!-- <button *ngIf="user.isAuthenticated else noAuth" type="button" class="btn btn-warning"
 (click)="logout()">注销</button> -->
-
-
 
 
 

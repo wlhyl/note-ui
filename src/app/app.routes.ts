@@ -7,6 +7,7 @@ import { CategoryArticlesComponent } from './component/category-articles/categor
 import { ArticleComponent } from './component/article/article.component';
 import { TagArticlesComponent } from './component/tag-articles/tag-articles.component';
 import { ArticlesComponent } from './component/articles/articles.component';
+import { SearchArticlesComponent } from './component/search-articles/search-articles.component';
 import { BlogComponent } from './component/blog/blog.component';
 
 export const routes: Routes = [
@@ -21,6 +22,10 @@ export const routes: Routes = [
       {
         path: 'articles/:id',
         component: ArticleComponent,
+      },
+      {
+        path: 'search',
+        component: SearchArticlesComponent,
       },
       {
         path: 'tags/names/:name',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api/api.service';
 import { AuthenticationInfoService } from '../../services/authentication/authentication-info.service';
 import { ConfigService } from '../../services/config/config.service';
@@ -19,10 +20,11 @@ import {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [RouterModule, AlertComponent, NgbDropdownModule],
+  imports: [RouterModule, AlertComponent, NgbDropdownModule, FormsModule],
 })
 export class HeaderComponent implements OnInit {
   message: Array<Alert> = [];
+  searchKeyword = '';
 
   constructor(
     private router: Router,
@@ -53,5 +55,20 @@ export class HeaderComponent implements OnInit {
         });
       },
     });
+  }
+
+  onSearch() {
+    if (this.searchKeyword.trim()) {
+      this.router.navigate(['/blog/search'], {
+        queryParams: { keyword: this.searchKeyword },
+      });
+      this.searchKeyword = '';
+    }
+  }
+
+  onSearchKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.onSearch();
+    }
   }
 }
