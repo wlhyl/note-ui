@@ -8,14 +8,14 @@ import { Alert } from '../../types/alert';
 import { AlertName as AlterEnum } from '../../enum/alert';
 import { AlertComponent } from '../../common/alert/alert.component';
 import { ArticlePageComponent } from '../article-page/article-page.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-search-articles',
   templateUrl: './search-articles.component.html',
   styleUrls: ['./search-articles.component.scss'],
   standalone: true,
-  imports: [AlertComponent, ArticlePageComponent, CommonModule],
+  imports: [AlertComponent, ArticlePageComponent],
 })
 export class SearchArticlesComponent implements OnInit {
   public loading = false;
