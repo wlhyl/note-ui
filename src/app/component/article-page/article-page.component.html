@@ -1,6 +1,8 @@
-@for (article of articles; track article) {
-  <app-article-card [article]="article"></app-article-card>
-}
+<div class="article-list">
+  @for (article of articles; track article) {
+    <app-article-card [article]="article"></app-article-card>
+  }
+</div>
 
 <!-- <nav aria-label="Page navigation example">
 <ul class="pagination justify-content-center">
