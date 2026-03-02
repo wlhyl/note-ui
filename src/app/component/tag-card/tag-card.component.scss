@@ -1,3 +1,17 @@
-a{
-    display: block;
+a {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 4px 6px;
+    border-radius: 20px;
+    color: var(--text-secondary);
+    background: var(--bg-color);
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    
+    &:hover {
+        color: white;
+        background: linear-gradient(135deg, #48bb78 0%, #68d391 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(72, 187, 120, 0.25);
+    }
 }

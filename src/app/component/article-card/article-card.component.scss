@@ -1,24 +1,117 @@
 i {
     font-style: normal;
+    margin-right: 4px;
 }
 
 h5 {
     display: inline;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
+.article-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    overflow: hidden;
+    
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-3px);
+        border-color: var(--primary-light);
+    }
+}
 
-// a {
-//     text-decoration: none;
+.card-body {
+    padding: 1.5rem;
+}
 
-//     :hover {
-//         text-decoration: underline blue;
-//     }
+.card-title {
+    margin-bottom: 0.75rem;
+    
+    a {
+        color: var(--text-primary);
+        font-weight: 600;
+        transition: color 0.3s ease;
+        
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+}
 
-//     color: black;
-// }
+.sticky-badge {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
 
-// span :hover {
-//     text-decoration: underline black //This colour is an example
+.card-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
+.card-footer {
+    background: transparent;
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    
+    i {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+    
+    a {
+        color: var(--text-secondary);
+        transition: color 0.3s ease;
+        
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+}
 
-// }
+.meta-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 16px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    
+    i {
+        font-size: 0.9rem;
+    }
+}
+
+.edit-link {
+    color: var(--text-muted) !important;
+    transition: all 0.3s ease !important;
+    
+    &:hover {
+        color: var(--primary-color) !important;
+    }
+}
+
+.float-end {
+    margin-left: auto;
+    color: var(--text-muted);
+}

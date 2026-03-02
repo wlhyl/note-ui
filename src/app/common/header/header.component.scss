@@ -1,9 +1,96 @@
 .active {
-    font-weight: bold;
-    // background-color: #DCDCDC;
-
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
 }
 
 a:hover {
     text-decoration: none;
+}
+
+header {
+    background: linear-gradient(135deg, #4a6cf7 0%, #6b8cff 100%) !important;
+    box-shadow: 0 2px 12px rgba(74, 108, 247, 0.2);
+}
+
+.site-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: white !important;
+    transition: opacity 0.3s ease;
+    
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.search-input {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    border-radius: 20px !important;
+    padding: 6px 16px !important;
+    transition: all 0.3s ease;
+    
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    &:focus {
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-color: rgba(255, 255, 255, 0.4) !important;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15) !important;
+        outline: none;
+    }
+}
+
+.btn-outline-light {
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-weight: 500;
+    border-width: 1.5px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background: white;
+        color: #4a6cf7;
+        transform: translateY(-1px);
+    }
+}
+
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    color: white;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+    
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    i {
+        font-size: 1.5rem;
+    }
+    
+    span {
+        font-weight: 500;
+    }
+}
+
+.dropdown-toggle::after {
+    display: none;
 }

@@ -1,8 +1,13 @@
 .page {
-    color: blue;
+    color: var(--text-muted);
     cursor: pointer;
-}
-
-.page:hover {
-    text-decoration: underline;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+    display: inline-block;
+    
+    &:hover {
+        color: var(--primary-color);
+        background: var(--bg-color);
+    }
 }
