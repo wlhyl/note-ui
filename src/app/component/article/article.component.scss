@@ -1,3 +1,64 @@
 i {
     font-style: normal;
 }
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+.card-footer {
+    i {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        
+        a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            
+            &:hover {
+                color: var(--primary-color);
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+    }
+    
+    .card-footer {
+        padding: 1rem;
+        
+        i {
+            display: block;
+            margin-bottom: 0.5rem !important;
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+    markdown {
+        font-size: 0.9rem;
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 1.1rem;
+        }
+        
+        pre, code {
+            font-size: 0.85rem;
+        }
+    }
+}

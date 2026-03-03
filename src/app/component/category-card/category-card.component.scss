@@ -63,3 +63,24 @@
         background: var(--bg-color);
     }
 }
+
+@media (max-width: 991px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .category-link {
+        padding: 4px 10px;
+        font-size: 0.85rem;
+        margin: 2px 4px;
+    }
+    
+    .category-list {
+        max-height: 60px;
+    }
+}

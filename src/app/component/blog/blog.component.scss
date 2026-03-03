@@ -1,0 +1,23 @@
+.app-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 991px) {
+    .main-content {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .row {
+        margin-top: 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+}

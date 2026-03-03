@@ -35,3 +35,24 @@
     padding-bottom: 12px;
     border-bottom: 2px solid var(--border-color);
 }
+
+@media (max-width: 991px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .archive-link {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+    
+    .page {
+        font-size: 0.9rem;
+        padding: 3px 6px;
+    }
+}
