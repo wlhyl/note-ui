@@ -1,64 +1,73 @@
 <header class="p-3 text-bg-dark">
   <div class="container">
-    <div class="row d-flex flex-wrap align-items-center justify-content-start justify-content-lg-start">
-      <a routerLink="/blog/articles"
-        class="col-2 d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        {{configService.config.site_name}}
-        <!-- <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg> -->
-      </a>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a routerLink="/blog/articles"
+          class="navbar-brand text-white">
+          {{configService.config.site_name}}
+        </a>
+        
+        <button class="navbar-toggler navbar-dark" type="button" 
+          (click)="toggleMenu()" 
+          [attr.aria-expanded]="isMenuExpanded"
+          aria-controls="navbarNav" 
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <ul class="nav col-6 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a routerLink="/blog/articles" class="nav-link px-2 text-white" routerLinkActive="active">首页</a>
-      </li>
-      <!-- <li><a routerLink="/blog/categories" class="nav-link px-2 text-white" routerLinkActive="active">文章分类</a>
-    </li>
-    <li><a routerLink="/blog/tags" class="nav-link px-2 text-white" routerLinkActive="active">标签</a></li>
-    <li><a routerLink="/blog/archives" class="nav-link px-2 text-white" routerLinkActive="active">归档</a>
-  </li>-->
-  <li><a routerLink="/user/edit" class="nav-link px-2 text-white" routerLinkActive="active">写文章</a></li>
-  @if (user.isAuthenticated) {
-    <li><a routerLink="/user" class="nav-link px-2 text-white"
-    routerLinkActive="active">管理</a></li>
-  }
-</ul>
+        <div class="collapse navbar-collapse" id="navbarNav" 
+          [class.show]="isMenuExpanded">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a routerLink="/blog/articles" class="nav-link text-white" 
+                routerLinkActive="active" 
+                (click)="closeMenu()">首页</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/user/edit" class="nav-link text-white" 
+                routerLinkActive="active"
+                (click)="closeMenu()">写文章</a>
+            </li>
+            @if (user.isAuthenticated) {
+              <li class="nav-item">
+                <a routerLink="/user" class="nav-link text-white"
+                  routerLinkActive="active"
+                  (click)="closeMenu()">管理</a>
+              </li>
+            }
+          </ul>
 
-<form class="col-2 col-lg-auto mb-3 mb-lg-0 me-lg-3" (ngSubmit)="onSearch()" role="search">
-  <input type="search" class="form-control search-input" placeholder="搜索文章..."
-    aria-label="Search" [(ngModel)]="searchKeyword" name="searchKeyword" (keydown)="onSearchKeyDown($event)">
-</form>
+          <form class="d-flex mb-3 mb-lg-0" (ngSubmit)="onSearch()" role="search">
+            <input type="search" class="form-control search-input me-2" placeholder="搜索文章..."
+              aria-label="Search" [(ngModel)]="searchKeyword" name="searchKeyword" 
+              (keydown)="onSearchKeyDown($event)">
+          </form>
 
-<div class="text-end col-2">
+          <div class="d-flex">
 
-  @if (!user.isAuthenticated) {
-    <button type="button" class="btn btn-outline-light me-2"
-    (click)="login()">登录</button>
-  } @else {
-    <div ngbDropdown class="d-inline-block">
-      <!-- <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
-      <div ngbDropdownToggle id="dropdownBasic1">
-        @if (user.user.avatar) {
-          <img [src]="user.user.avatar" />
-        } @else {
-          <i class="bi bi-person"></i>
-        }
-        <span>{{user.user.nick}}</span>
+            @if (!user.isAuthenticated) {
+              <button type="button" class="btn btn-outline-light me-2"
+              (click)="login()">登录</button>
+            } @else {
+              <div ngbDropdown class="d-inline-block">
+                <div ngbDropdownToggle id="dropdownBasic1">
+                  @if (user.user.avatar) {
+                    <img [src]="user.user.avatar" />
+                  } @else {
+                    <i class="bi bi-person"></i>
+                  }
+                  <span>{{user.user.nick}}</span>
+                </div>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem (click)="logout()">注销</button>
+                </div>
+              </div>
+            }
+
+          </div>
+        </div>
       </div>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <!-- <span ngbDropdownItem>注销</span> -->
-        <button ngbDropdownItem (click)="logout()">注销</button>
-        <!-- <button ngbDropdownItem>Action - 1</button>
-        <button ngbDropdownItem>Another Action</button>
-        <button ngbDropdownItem>Something else is here</button> -->
-      </div>
-    </div>
-  }
-  <!-- <button *ngIf="user.isAuthenticated else noAuth" type="button" class="btn btn-warning"
-(click)="logout()">注销</button> -->
-
-
-
-</div>
-</div>
-</div>
+    </nav>
+  </div>
 <app-alert [(alerts)]="message"></app-alert>
 </header>

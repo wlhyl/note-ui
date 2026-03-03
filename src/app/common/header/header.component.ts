@@ -25,6 +25,7 @@ import {
 export class HeaderComponent implements OnInit {
   message: Array<Alert> = [];
   searchKeyword = '';
+  isMenuExpanded = false;
 
   constructor(
     private router: Router,
@@ -34,6 +35,14 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  toggleMenu() {
+    this.isMenuExpanded = !this.isMenuExpanded;
+  }
+
+  closeMenu() {
+    this.isMenuExpanded = false;
+  }
 
   login() {
     // this.router.navigate(['/login']);

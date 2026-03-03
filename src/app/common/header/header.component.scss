@@ -96,3 +96,75 @@ header {
 .dropdown-toggle::after {
     display: none;
 }
+
+.navbar {
+    padding: 0.5rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: white !important;
+    transition: opacity 0.3s ease;
+    
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.navbar-toggler {
+    border: none;
+    
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+.navbar-nav {
+    .nav-item {
+        margin: 0.25rem 0;
+        
+        .nav-link {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            
+            &.active {
+                font-weight: 600;
+                background: rgba(255, 255, 255, 0.15) !important;
+            }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .navbar-nav {
+        margin-bottom: 1rem !important;
+        
+        .nav-item {
+            margin: 0.5rem 0;
+        }
+    }
+    
+    .search-input {
+        width: 100%;
+        margin-bottom: 1rem !important;
+    }
+    
+    .d-flex:last-child {
+        justify-content: center;
+        padding: 0.5rem 0;
+    }
+}
