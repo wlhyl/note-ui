@@ -1,11 +1,15 @@
 <div class="card mb-5">
   <div class="card-body">
     <h5 class="card-title"> 文章标签 </h5>
-    @for (tag of tags.data; track tag) {
-      <a routerLink="/blog/tags/names/{{tag}}" class="mx-1">{{ tag }}</a>
-    }
-    @if (page+1< tags.total_pages) {
-      <a class="mx-1" (click)="next()">更多</a>
+    <div class="tag-list" [class.expanded]="isExpanded">
+      @for (tag of tags.data; track tag) {
+        <a routerLink="/blog/tags/names/{{tag}}" class="mx-1">{{ tag }}</a>
+      }
+    </div>
+    @if (!allLoaded) {
+      <a class="mx-1 toggle-btn" (click)="next()">更多</a>
+    } @else if (tags.data.length > 8) {
+      <a class="mx-1 toggle-btn" (click)="toggle()">{{ isExpanded ? '收起' : '更多' }}</a>
     }
   </div>
   <app-alert [(alerts)]="message"></app-alert>

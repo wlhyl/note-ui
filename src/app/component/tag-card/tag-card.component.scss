@@ -15,3 +15,36 @@ a {
         box-shadow: 0 4px 12px rgba(72, 187, 120, 0.25);
     }
 }
+
+.card-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tag-list {
+    max-height: 84px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+
+    &.expanded {
+        max-height: none;
+    }
+}
+
+.toggle-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 4px 6px;
+    border-radius: 20px;
+    color: #48bb78;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    
+    &:hover {
+        background: var(--bg-color);
+    }
+}

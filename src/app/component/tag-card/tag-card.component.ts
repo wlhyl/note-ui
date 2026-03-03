@@ -22,6 +22,7 @@ export class TagCardComponent implements OnInit {
   };
   public page = 0;
   public size = 5;
+  public isExpanded = false;
 
   message: Array<Alert> = [];
 
@@ -29,6 +30,10 @@ export class TagCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTags();
+  }
+
+  get allLoaded(): boolean {
+    return this.page >= this.tags.total_pages - 1;
   }
 
   getTags(): void {
@@ -52,5 +57,10 @@ export class TagCardComponent implements OnInit {
     if (this.page + 1 >= this.tags.total_pages) return;
     this.page += 1;
     this.getTags();
+    this.isExpanded = true;
+  }
+
+  toggle(): void {
+    this.isExpanded = !this.isExpanded;
   }
 }
