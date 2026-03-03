@@ -38,3 +38,28 @@
     padding-bottom: 12px;
     border-bottom: 2px solid var(--border-color);
 }
+
+.category-list {
+    max-height: 84px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+
+    &.expanded {
+        max-height: none;
+    }
+}
+
+.toggle-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 4px 6px;
+    border-radius: 20px;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    
+    &:hover {
+        background: var(--bg-color);
+    }
+}

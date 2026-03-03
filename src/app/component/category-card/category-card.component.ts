@@ -17,6 +17,7 @@ import { AlertComponent } from '../../common/alert/alert.component';
 export class CategoryCardComponent implements OnInit {
   public categories: Array<string> = [];
   public total = 0;
+  public isExpanded = false;
 
   public page = 0;
   private size = 5;
@@ -27,6 +28,10 @@ export class CategoryCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+  }
+
+  get allLoaded(): boolean {
+    return this.page >= this.total - 1;
   }
 
   getCategories() {
@@ -48,5 +53,10 @@ export class CategoryCardComponent implements OnInit {
     if (this.page + 1 >= this.total) return;
     this.page += 1;
     this.getCategories();
+    this.isExpanded = true;
+  }
+
+  toggle(): void {
+    this.isExpanded = !this.isExpanded;
   }
 }
