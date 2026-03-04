@@ -20,7 +20,6 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ConfigComponent } from './config/config.component';
 import { TagsComponent } from './tags/tags.component';
 import { ImagesComponent } from './images/images.component';
-// import {MatChipsModule} from '@angular/material';
 // code mirror 编辑器
 import { CodeEditor } from '@acrodata/code-editor';
 

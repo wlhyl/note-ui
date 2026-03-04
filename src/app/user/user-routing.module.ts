@@ -28,6 +28,7 @@ const routes: Routes = [
         canDeactivate: [editGuard],
       },
       { path: 'config', component: ConfigComponent },
+      { path: '', redirectTo: 'articles', pathMatch: 'full' },
     ],
   },
 ];

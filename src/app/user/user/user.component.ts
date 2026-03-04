@@ -7,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
     standalone: false
 })
 export class UserComponent implements OnInit {
+    isSidebarCollapsed = true;
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
+    toggleSidebar(): void {
+        this.isSidebarCollapsed = !this.isSidebarCollapsed;
+    }
 }

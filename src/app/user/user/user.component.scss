@@ -1,6 +1,47 @@
+.user-layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.sidebar-header {
+    display: none;
+    padding: 0.5rem;
+    background-color: #212529;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-toggle {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.left-sidebar {
+    background-color: #212529;
+    padding: 1rem;
+    width: 16.66667%;
+    border-radius: 0;
+    overflow-y: auto;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.main-area {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
 nav {
     a {
-        color: var(--text-secondary);
+        color: rgba(255, 255, 255, 0.75);
         text-decoration: none;
         padding: 12px 20px;
         border-radius: var(--radius-sm);
@@ -9,8 +50,8 @@ nav {
         margin-bottom: 4px;
 
         &:hover {
-            background-color: var(--bg-color);
-            color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
         }
     }
 }
@@ -18,4 +59,38 @@ nav {
 .active {
     background-color: var(--primary-color) !important;
     color: white !important;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+    }
+    
+    .left-sidebar {
+        width: 100%;
+        min-height: auto;
+        max-height: 0;
+        padding: 0 1rem;
+        overflow: hidden;
+        
+        &.collapsed {
+            max-height: 0;
+            padding: 0 1rem;
+        }
+        
+        &:not(.collapsed) {
+            max-height: 300px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+    }
+    
+    .main-area {
+        overflow-y: auto;
+    }
 }
