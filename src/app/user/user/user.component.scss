@@ -1,8 +1,15 @@
 .user-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    z-index: 1000;
+    background-color: var(--bg-color);
 }
 
 .main-content {
@@ -37,6 +44,7 @@
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
+    height: 100%;
 }
 
 nav {
