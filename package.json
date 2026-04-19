@@ -23,7 +23,7 @@
   },
   "private": true,
   "dependencies": {
-    "@acrodata/code-editor": "^0.6.0",
+    "@acrodata/code-editor": "^0.6.1",
     "@angular/cdk": "^21.2.0",
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
@@ -39,13 +39,13 @@
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "express": "^5.1.0",
-    "marked": "^17.0.3",
-     "ngx-cookie-service-ssr": "^21.1.0",
-    "ngx-markdown": "^21.1.0",
+    "marked": "^17.0.6",
+    "ngx-cookie-service-ssr": "^21.3.1",
+    "ngx-markdown": "^21.2.0",
     "prismjs": "^1.30.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.16.0"
+    "zone.js": "^0.16.1"
   },
   "devDependencies": {
     "@angular/build": "^21.2.0",
