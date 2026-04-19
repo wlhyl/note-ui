@@ -9,6 +9,7 @@ import { TagsComponent } from './tags/tags.component';
 import { EditComponent } from './edit/edit.component';
 import { ConfigComponent } from './config/config.component';
 import { ImagesComponent } from './images/images.component';
+import { CategoryArticlesSortComponent } from './category-articles-sort/category-articles-sort.component';
 import { editGuard } from '../guards/edit/edit.guard';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'userinfo', component: UserInfoComponent },
       { path: 'articles', component: ArticlesComponent },
       { path: 'categories', component: CategoriesComponent },
+      { path: 'categories/:id/sort', component: CategoryArticlesSortComponent },
       { path: 'tags', component: TagsComponent },
       { path: 'images', component: ImagesComponent },
       { path: 'edit', component: EditComponent, canDeactivate: [editGuard] },

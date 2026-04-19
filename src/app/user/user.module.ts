@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 // cdk
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -20,6 +21,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ConfigComponent } from './config/config.component';
 import { TagsComponent } from './tags/tags.component';
 import { ImagesComponent } from './images/images.component';
+import { CategoryArticlesSortComponent } from './category-articles-sort/category-articles-sort.component';
 // code mirror 编辑器
 import { CodeEditor } from '@acrodata/code-editor';
 
@@ -38,10 +40,12 @@ import { UploadComponent } from '../common/upload/upload.component';
     ConfigComponent,
     TagsComponent,
     ImagesComponent,
+    CategoryArticlesSortComponent,
   ],
   imports: [
     CommonModule,
     TextFieldModule,
+    DragDropModule,
     MarkdownModule.forChild(),
     UserRoutingModule,
     FormsModule,

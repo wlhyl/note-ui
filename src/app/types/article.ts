@@ -52,3 +52,18 @@ export interface PatchArticle {
   tags: Array<string>;
   private: boolean;
 }
+
+/**
+ * 文章排序项
+ */
+export interface ArticleSortItem {
+  article_id: number;
+  sort_order: number;
+}
+
+/**
+ * 更新文章排序请求
+ */
+export interface UpdateArticleSortOrderRequest {
+  articles: ArticleSortItem[];
+}

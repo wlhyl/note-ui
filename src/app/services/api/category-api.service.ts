@@ -5,7 +5,7 @@ import { AuthenticationInfoService } from '../authentication/authentication-info
 import { ENV_CONFIG } from '../../tokens/app-config.token';
 import { Observable } from 'rxjs';
 import { PageResponser } from '../../types/page';
-import { ArticlePreview } from '../../types/article';
+import { ArticlePreview, ArticleSortItem } from '../../types/article';
 import { Category, PatchCategory } from '../../types/category';
 
 @Injectable({
@@ -127,5 +127,17 @@ export class CategoryApiService {
     return this.http.delete<Category>(`${this.url}/categories/${id}`, {
       headers: { token: this.user.token },
     });
+  }
+
+  // 更新文章排序
+  public updateArticlesSortOrder(
+    categoryId: number,
+    items: ArticleSortItem[]
+  ): Observable<ArticlePreview[]> {
+    return this.http.put<ArticlePreview[]>(
+      `${this.url}/categories/${categoryId}/articles/sort`,
+      { articles: items },
+      { headers: { token: this.user.token } }
+    );
   }
 }

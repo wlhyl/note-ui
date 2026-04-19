@@ -1,0 +1,69 @@
+<app-alert [(alerts)]="message"></app-alert>
+
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>
+      @if (categoryName) {
+        排序: {{ categoryName }}
+      } @else {
+        排序文章
+      }
+    </h2>
+    <div>
+      <button type="button" class="btn btn-secondary me-2" (click)="goBack()">
+        返回
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="save()"
+        [disabled]="saving || articles.length === 0"
+      >
+        @if (saving) {
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          保存中...
+        } @else {
+          保存排序
+        }
+      </button>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="text-center my-4">
+      <span class="spinner-border" role="status" aria-hidden="true"></span>
+      <span class="ms-2">加载中...</span>
+    </div>
+  }
+
+  @if (!loading && articles.length === 0) {
+    <div class="alert alert-info">该分类下没有文章</div>
+  }
+
+  @if (!loading && articles.length > 0) {
+    <div class="alert alert-info d-flex align-items-center mb-3" role="alert">
+      <i class="bi bi-info-circle-fill me-2"></i>
+      拖拽文章卡片调整顺序，然后点击保存
+    </div>
+
+    <div
+      cdkDropList
+      class="article-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (article of articles; track article.id; let i = $index) {
+        <div cdkDrag class="article-item p-3 mb-2 border rounded bg-light">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <span class="badge bg-secondary me-3">{{ i + 1 }}</span>
+              <span class="fw-medium">{{ article.title }}</span>
+            </div>
+            <div cdkDragHandle class="drag-handle">
+              <i class="bi bi-grip-vertical"></i>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

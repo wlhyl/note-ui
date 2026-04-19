@@ -76,6 +76,9 @@
           }
         </td>
         <td>
+          @if (typeof category.total === 'number' && category.total > 0) {
+            <a routerLink="/user/categories/{{category.category.id}}/sort" class="me-2">排序</a>
+          }
           @if (deleting==category.category.id) {
             <span style="color: #b32d2e;">删除中...</span>
           }
