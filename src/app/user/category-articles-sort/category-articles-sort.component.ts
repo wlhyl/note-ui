@@ -88,4 +88,16 @@ export class CategoryArticlesSortComponent implements OnInit {
   goBack() {
     this.router.navigate(['/user/categories']);
   }
+
+  moveToIndex(article: ArticlePreview, targetIndex: number) {
+    if (targetIndex < 1 || targetIndex > this.articles.length) {
+      return;
+    }
+    const currentIndex = this.articles.findIndex((a) => a.id === article.id);
+    if (currentIndex === -1 || currentIndex === targetIndex - 1) {
+      return;
+    }
+    this.articles.splice(currentIndex, 1);
+    this.articles.splice(targetIndex - 1, 0, article);
+  }
 }

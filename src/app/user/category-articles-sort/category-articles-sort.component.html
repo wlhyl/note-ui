@@ -58,8 +58,27 @@
               <span class="badge bg-secondary me-3">{{ i + 1 }}</span>
               <span class="fw-medium">{{ article.title }}</span>
             </div>
-            <div cdkDragHandle class="drag-handle">
-              <i class="bi bi-grip-vertical"></i>
+            <div class="d-flex align-items-center gap-2">
+              <input
+                type="number"
+                class="form-control form-control-sm position-input"
+                placeholder="位置"
+                min="1"
+                [max]="articles.length"
+                #posInput
+                (keydown.enter)="moveToIndex(article, posInput.valueAsNumber); posInput.value = ''"
+              />
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+                (click)="moveToIndex(article, posInput.valueAsNumber); posInput.value = ''"
+                title="移动到指定位置"
+              >
+                <i class="bi bi-arrow-right-circle"></i>
+              </button>
+              <div cdkDragHandle class="drag-handle">
+                <i class="bi bi-grip-vertical"></i>
+              </div>
             </div>
           </div>
         </div>
