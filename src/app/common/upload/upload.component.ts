@@ -1,5 +1,5 @@
 import { HttpEventType } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { finalize, Subscription } from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
 import {
@@ -12,6 +12,7 @@ import {
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     // NgbTooltipModule,
     NgbProgressbarModule,

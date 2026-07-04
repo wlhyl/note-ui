@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { ApiService } from '../../services/api/api.service';
@@ -15,6 +15,7 @@ import { ArticlePageComponent } from '../article-page/article-page.component';
   templateUrl: './search-articles.component.html',
   styleUrls: ['./search-articles.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [AlertComponent, ArticlePageComponent],
 })
 export class SearchArticlesComponent implements OnInit {

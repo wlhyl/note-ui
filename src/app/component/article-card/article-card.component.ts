@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AuthenticationInfoService } from '../..//services/authentication/authentication-info.service';
 import { ArticlePreview } from '../../types/article';
 
@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './article-card.component.html',
   styleUrls: ['./article-card.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterModule],
 })
 export class ArticleCardComponent implements OnInit {

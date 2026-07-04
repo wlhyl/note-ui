@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AlertName as AlterEnum } from '../../enum/alert';
 import { ApiService } from '../../services/api/api.service';
 import { ConfigService } from '../../services/config/config.service';
@@ -9,6 +9,7 @@ import { Config, ConfigResponse } from '../../types/config';
     selector: 'app-config',
     templateUrl: './config.component.html',
     styleUrls: ['./config.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ConfigComponent implements OnInit {

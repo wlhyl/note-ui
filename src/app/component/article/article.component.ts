@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DocType } from '../../enum/doc-type';
 import { ApiService } from '../../services/api/api.service';
@@ -17,6 +17,7 @@ import { MarkdownModule } from 'ngx-markdown';
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.scss'],
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [AlertComponent, RouterModule, MarkdownModule],
 })
 export class ArticleComponent implements OnInit {

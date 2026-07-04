@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
 import { Alert } from '../../types/alert';
@@ -9,6 +9,7 @@ import { PatchTag, Tag } from '../../types/tag';
     selector: 'app-tags',
     templateUrl: './tags.component.html',
     styleUrls: ['./tags.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TagsComponent implements OnInit {

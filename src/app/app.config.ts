@@ -2,7 +2,7 @@ import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalE
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withEventReplay, withNoIncrementalHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthenticationInfoService } from './services/authentication/authentication-info.service';
 import { ApiService } from './services/api/api.service';
@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideMarkdown(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes), provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
     {
       provide: ENV_CONFIG,
       useValue: envConfig,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
 import { Alert } from '../../types/alert';
 import { ArticlePreview } from '../../types/article';
@@ -9,6 +9,7 @@ import { lastValueFrom } from 'rxjs';
     selector: 'app-articles',
     templateUrl: './articles.component.html',
     styleUrls: ['./articles.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ArticlesComponent implements OnInit {

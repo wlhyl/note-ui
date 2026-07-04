@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ApiService } from '../../services/api/api.service';
 import { AuthenticationInfoService } from '../../services/authentication/authentication-info.service';
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [AlertComponent, FormsModule],
 })
 export class LoginComponent implements OnInit {

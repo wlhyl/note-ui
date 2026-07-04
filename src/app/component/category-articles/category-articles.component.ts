@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ApiService } from '../../services/api/api.service';
 import { Alert } from '../../types/alert';
@@ -12,6 +12,7 @@ import { ArticlePageComponent } from '../article-page/article-page.component';
     templateUrl: './category-articles.component.html',
     styleUrls: ['./category-articles.component.scss'],
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports:[AlertComponent,ArticlePageComponent]
 })
 export class CategoryArticlesComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Alert } from '../../types/alert';
 
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgbAlertModule],
 })
 export class AlertComponent implements OnInit {

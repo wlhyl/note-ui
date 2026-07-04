@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
 import { Alert } from '../../types/alert';
 import { AlertName as AlterEnum } from '../../enum/alert';
@@ -13,6 +13,7 @@ import { AlertComponent } from '../../common/alert/alert.component';
   templateUrl: './archive-card.component.html',
   styleUrls: ['./archive-card.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterModule, AlertComponent],
 })
 export class ArchiveCardComponent implements OnInit {

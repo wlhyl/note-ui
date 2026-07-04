@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- 升级到 Angular 22
+- 升级到 ng-bootstrap 21.0.0
+- 升级到 marked 18.0.5
+- 升级到 ngx-cookie-service-ssr 22.0.0
+- 升级到 ngx-markdown 22.0.0
+- 升级 Docker 基础镜像 node 到 24.18.0
+- 升级 Docker 基础镜像 nginx 到 1.31-alpine-slim
+
 ## [0.3.1] - 2026-04-21
 
 ### Added

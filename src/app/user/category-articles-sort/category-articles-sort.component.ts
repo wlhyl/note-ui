@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -11,6 +11,7 @@ import { ArticlePreview } from '../../types/article';
   selector: 'app-category-articles-sort',
   templateUrl: './category-articles-sort.component.html',
   styleUrls: ['./category-articles-sort.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class CategoryArticlesSortComponent implements OnInit {

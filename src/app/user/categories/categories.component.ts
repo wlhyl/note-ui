@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Alert } from '../../types/alert';
 import { AlertName as AlterEnum } from '../../enum/alert';
@@ -9,6 +9,7 @@ import { Category, PatchCategory } from '../../types/category';
     selector: 'app-categories',
     templateUrl: './categories.component.html',
     styleUrls: ['./categories.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CategoriesComponent implements OnInit {

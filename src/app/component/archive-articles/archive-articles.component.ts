@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ApiService } from '../../services/api/api.service';
 import { Alert } from '../../types/alert';
@@ -13,6 +13,7 @@ import { ArticleCardComponent } from '../article-card/article-card.component';
   templateUrl: './archive-articles.component.html',
   styleUrls: ['./archive-articles.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [AlertComponent, ArticleCardComponent],
 })
 export class ArchiveArticlesComponent implements OnInit {

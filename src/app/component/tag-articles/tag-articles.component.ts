@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ApiService } from '../../services/api/api.service';
 import { ArticlePreview } from '../../types/article';
@@ -14,6 +14,7 @@ import { ArticlePageComponent } from '../article-page/article-page.component';
     templateUrl: './tag-articles.component.html',
     styleUrls: ['./tag-articles.component.scss'],
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [AlertComponent,ArticlePageComponent]
 })
 export class TagArticlesComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
 import { AuthenticationInfoService } from '../../services/authentication/authentication-info.service';
 import { PatchUser, User } from '../../types/user';
@@ -9,6 +9,7 @@ import { Alert } from '../../types/alert';
     selector: 'app-user-info',
     templateUrl: './user-info.component.html',
     styleUrls: ['./user-info.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class UserInfoComponent implements OnInit {

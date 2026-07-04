@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ArticlePreview } from '../../types/article';
 
@@ -16,6 +17,7 @@ import { ArticleCardComponent } from '..//article-card/article-card.component';
     templateUrl: './article-page.component.html',
     styleUrls: ['./article-page.component.scss'],
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ArticleCardComponent],
 })
 export class ArticlePageComponent implements OnInit, OnChanges {
