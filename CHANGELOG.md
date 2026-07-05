@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-07-06
+
+### Fixed
+
+- 修复 ngx-markdown 动态渲染内容样式不生效的问题（使用 ::ng-deep 穿透视图封装）
+- 修复 Markdown 表格无样式的问题，添加边框、表头背景、斑马纹和悬停高亮
+- 修复响应式布局下 Markdown 内标题和代码字号不生效的问题
+- 修复 Markdown 表格中文短内容被挤压换行的问题（使用 word-break: keep-all）
+
 ### Changed
 
 - 升级到 Angular 22

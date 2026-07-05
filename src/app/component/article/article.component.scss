@@ -2,6 +2,52 @@ i {
     font-style: normal;
 }
 
+:host ::ng-deep markdown {
+    display: block;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.25em 0;
+        font-size: 0.95em;
+        overflow-x: auto;
+        display: block;
+
+        th,
+        td {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--bg-color);
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        td {
+            max-width: 60ch;
+            overflow-wrap: break-word;
+            word-break: keep-all;
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(74, 108, 247, 0.025);
+        }
+
+        tr:hover td {
+            background: rgba(74, 108, 247, 0.06);
+        }
+
+        code {
+            white-space: nowrap;
+        }
+    }
+}
+
 .card-title {
     font-size: 1.5rem;
     font-weight: 600;
@@ -50,13 +96,13 @@ i {
         }
     }
     
-    markdown {
+    :host ::ng-deep markdown {
         font-size: 0.9rem;
-        
+
         h1, h2, h3, h4, h5, h6 {
             font-size: 1.1rem;
         }
-        
+
         pre, code {
             font-size: 0.85rem;
         }
