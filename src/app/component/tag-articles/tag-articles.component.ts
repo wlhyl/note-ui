@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
 import { ArticlePreview } from '../../types/article';
 import { Alert } from '../../types/alert';
@@ -26,29 +27,35 @@ export class TagArticlesComponent implements OnInit {
 
   message: Array<Alert> = [];
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(
+    private api: ApiService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // let id = this.route.snapshot.paramMap.get('id')
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      // 重新设置this.page，因为点击tag加载文章后，再点击别的tag，此组件不会重新构造
-      // 因此constructor,ngOnInit都不会再执行
-      // 因此this.page仍是上一次的值
-      // 在此subscribe中重新设置this.page
-      this.page = 0;
+    combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(
+      ([params, queryParams]: [ParamMap, ParamMap]) => {
+        // 点击tag加载文章后，再点击别的tag，此组件不会重新构造
+        // 因此constructor,ngOnInit都不会再执行
+        // page从查询参数读取，切换tag时查询参数被丢弃，自动回到第1页
+        const page = Number(queryParams.get('page')) || 0;
+        this.page = page;
 
-      const tagName = params.get('name');
-      if (tagName === null || tagName === '') {
-        this.message.push({
-          type: AlterEnum.DANGER,
-          message: `没有此标签: ${tagName}`,
-        });
-        return;
+        const tagName = params.get('name');
+        if (tagName === null || tagName === '') {
+          this.message.push({
+            type: AlterEnum.DANGER,
+            message: `没有此标签: ${tagName}`,
+          });
+          return;
+        }
+        this.tagName = tagName;
+
+        this.getArticles(this.tagName, this.page, this.size);
       }
-      this.tagName = tagName;
-
-      this.getArticles(this.tagName, this.page, this.size);
-    });
+    );
   }
 
   private getArticles(tagName: string, page: number, size: number) {
@@ -79,6 +86,11 @@ export class TagArticlesComponent implements OnInit {
 
   pageChange(page: number) {
     this.page = page;
-    this.getArticles(this.tagName, page, this.size);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: page === 0 ? null : page },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 }

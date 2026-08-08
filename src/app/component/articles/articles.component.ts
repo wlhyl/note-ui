@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { ApiService } from '../../services/api/api.service';
 import { ArticlePreview } from '../../types/article';
@@ -30,16 +31,29 @@ export class ArticlesComponent implements OnInit {
 
   message: Array<Alert> = [];
 
-  constructor(private api: ApiService, private titleService: Title) {}
+  constructor(
+    private api: ApiService,
+    private titleService: Title,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
-    this.getArticles();
+    this.route.queryParamMap.subscribe((params) => {
+      this.page = Number(params.get('page')) || 0;
+      this.getArticles();
+    });
   }
 
   pageChange(page: number) {
     this.page = page;
-    this.getArticles();
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: page === 0 ? null : page },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 
   getArticles() {

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-08-08
+
+### Fixed
+
+- 修复浏览器后退时分页组件无法恢复页码的问题，将页码同步到 URL 查询参数（?page=N）
+
 ## [0.3.2] - 2026-07-06
 
 ### Fixed

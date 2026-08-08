@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
 import { Alert } from '../../types/alert';
 import { AlertName as AlterEnum } from '../../enum/alert';
@@ -24,26 +25,31 @@ export class CategoryArticlesComponent implements OnInit {
 
   message: Array<Alert> = [];
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(
+    private api: ApiService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      // 重新设置this.page
-      this.page = 0;
+    combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(
+      ([params, queryParams]: [ParamMap, ParamMap]) => {
+        const page = Number(queryParams.get('page')) || 0;
+        this.page = page;
 
-      const categoryName = params.get('name');
-      if (categoryName === null || categoryName === '') {
-        this.message.push({
-          type: AlterEnum.DANGER,
-          message: `没有此文章分类: ${categoryName}`,
-        });
-        return;
+        const categoryName = params.get('name');
+        if (categoryName === null || categoryName === '') {
+          this.message.push({
+            type: AlterEnum.DANGER,
+            message: `没有此文章分类: ${categoryName}`,
+          });
+          return;
+        }
+        // 加上此行，避免getArticles先执行完成，getCategory执行完成前，点击换页，使用旧的category id
+        this.categoryName = categoryName;
+        this.getArticles(this.categoryName, this.page, this.size);
       }
-      // 加上此行，避免getArticles先执行完成，getCategory执行完成前，点击换页，使用旧的category id
-      this.categoryName = categoryName;
-      // this.getCategory(categoryId);
-      this.getArticles(this.categoryName, this.page, this.size);
-    });
+    );
   }
 
   private getArticles(name: string, page: number, size: number) {
@@ -74,6 +80,11 @@ export class CategoryArticlesComponent implements OnInit {
 
   pageChange(page: number) {
     this.page = page;
-    this.getArticles(this.categoryName, page, this.size);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: page === 0 ? null : page },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 }

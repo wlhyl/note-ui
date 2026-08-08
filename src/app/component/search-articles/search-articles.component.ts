@@ -39,7 +39,7 @@ export class SearchArticlesComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: any) => {
       this.keyword = params['keyword'] || '';
-      this.page = 0;
+      this.page = Number(params['page']) || 0;
       if (this.keyword) {
         this.titleService.setTitle(`搜索: ${this.keyword}`);
         this.searchArticles();
@@ -51,7 +51,12 @@ export class SearchArticlesComponent implements OnInit {
 
   pageChange(page: number) {
     this.page = page;
-    this.searchArticles();
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: page === 0 ? null : page },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 
   searchArticles() {
