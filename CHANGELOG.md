@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.4] - 2026-10-18
+
+### Fixed
+
+- 修复文章分页组件 NG0955 重复 track key 问题（占位数组改用 track $index）
+- 修复 total 变更时页码范围计算的 off-by-one 问题（多渲染一个页码）
+
+### Changed
+
+- 升级到 marked 18.1.1
+- 升级到 ngx-markdown 22.1.1
+
 ## [0.3.3] - 2026-08-08
 
 ### Fixed

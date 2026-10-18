@@ -47,7 +47,7 @@ export class ArticlePageComponent implements OnInit, OnChanges {
       if (this.end > this.total) this.end = this.total;
     }
     if (changes['total']) {
-      this.end = this.start + this.per;
+      this.end = this.start + this.per - 1;
       if (this.end > this.total) this.end = this.total;
     }
   }

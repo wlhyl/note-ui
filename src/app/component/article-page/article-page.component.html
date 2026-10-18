@@ -9,7 +9,7 @@
   @if (page>0) {
   <i class="bi bi-caret-left page" (click)="previous()"></i>
   }
-  @for (item of [].constructor(end-start+1); track item; let i = $index) {
+  @for (item of [].constructor(end-start+1); track $index; let i = $index) {
   @if ((start + i - 1) !== page) {
   <span class="mx-2 page" (click)="toPage(start + i - 1)">{{start + i}}</span>
   } @else {
