@@ -143,6 +143,12 @@
   </ng-template>
 </button>
 
+@if (article.id > 0) {
+<button class="btn btn-outline-secondary ms-2" type="button" (click)="showHistory()">
+  历史
+</button>
+}
+
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">警告！</h4>

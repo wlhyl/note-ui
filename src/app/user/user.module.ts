@@ -14,6 +14,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditComponent } from './edit/edit.component';
+import { ArticleHistoryComponent } from './edit/article-history/article-history.component';
 import { UserComponent } from './user/user.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { ArticlesComponent } from './articles/articles.component';
@@ -36,6 +37,7 @@ import { UploadComponent } from '../common/upload/upload.component';
     UserInfoComponent,
     ArticlesComponent,
     EditComponent,
+    ArticleHistoryComponent,
     CategoriesComponent,
     ConfigComponent,
     TagsComponent,

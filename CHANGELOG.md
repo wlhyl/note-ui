@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-19
+
+### Added
+
+- 文章保存历史功能：编辑页（已有文章）工具栏新增"历史"按钮，弹出 NgbModal 查看历史列表（保存时间、标题、摘要、标签、私有状态）、历史详情（含正文预览），并支持回滚到指定历史版本（二次确认后调用后端回滚接口，用返回的文章刷新编辑器）
+- 新增 `ArticleHistoryPreview` / `ArticleHistoryDetail` 类型，以及历史列表、历史详情、回滚三个接口方法（`ArticleApiService`）
+
+### Fixed
+
+- 修复 markdown 表格在编辑页预览、文章历史预览等位置显示不正常的问题（样式从文章详情页组件迁移到全局，见 Changed）
+
+### Changed
+
+- markdown 表格样式（边框、表头、斑马纹、悬停、单元格换行、横向滚动）从 `article.component.scss` 迁移到全局 `src/styles.scss`，所有渲染 `<markdown>` 的位置共用同一套样式
+
 ## [0.4.1] - 2026-10-18
 
 ### Fixed

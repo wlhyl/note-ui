@@ -28,6 +28,7 @@ import { deepCopy } from '../../utils/object_utils';
 import { ConfigService } from '../../services/config/config.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ENV_CONFIG } from '../../tokens/app-config.token';
+import { ArticleHistoryComponent } from './article-history/article-history.component';
 
 @Component({
   selector: 'app-edit',
@@ -472,6 +473,32 @@ export class EditComponent implements OnInit, OnDestroy {
           // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
+  }
+
+  // 打开文章历史弹窗，回滚成功后用返回的文章刷新编辑器
+  showHistory() {
+    const modalRef = this.modalService.open(ArticleHistoryComponent, {
+      ariaLabelledBy: '文章历史',
+      size: 'lg',
+    });
+    modalRef.componentInstance.articleId = this.article.id;
+    modalRef.componentInstance.unsavedChanges = !this.isSaved;
+    modalRef.result.then(
+      (article: Article) => {
+        if (!article) return;
+        this.article = article;
+        this.tags = this.article.tags.map((tag) => tag.name);
+        this.oldArticle = deepCopy(this.article);
+        this.message = [];
+        this.message.push({
+          type: AlterEnum.SUCCESS,
+          message: '文章已回滚到指定历史版本！',
+        });
+      },
+      () => {
+        // 弹窗被关闭/取消，无需处理
+      }
+    );
   }
 }
 

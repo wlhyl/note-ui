@@ -147,3 +147,50 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     font-size: 12px;
 }
+
+/* markdown 渲染内容（文章详情页、编辑页预览、历史弹窗预览等所有位置） */
+markdown {
+    display: block;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.25em 0;
+        font-size: 0.95em;
+        overflow-x: auto;
+        display: block;
+
+        th,
+        td {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--bg-color);
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        td {
+            max-width: 60ch;
+            overflow-wrap: break-word;
+            word-break: keep-all;
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(74, 108, 247, 0.025);
+        }
+
+        tr:hover td {
+            background: rgba(74, 108, 247, 0.06);
+        }
+
+        code {
+            white-space: nowrap;
+        }
+    }
+}

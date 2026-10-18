@@ -1,0 +1,108 @@
+<div class="modal-header">
+  <h4 class="modal-title">文章历史</h4>
+  <button type="button" class="btn-close" aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <app-alert [(alerts)]="message"></app-alert>
+
+  @if (!detail) {
+  <!-- 列表态 -->
+  @if (loading) {
+  <div class="text-center my-3">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    加载中...
+  </div>
+  } @else if (histories.length === 0) {
+  <p class="text-muted my-3">暂无保存历史</p>
+  } @else {
+  <div class="list-group history-list">
+    @for (history of histories; track history.id) {
+    <button type="button" class="list-group-item list-group-item-action"
+      (click)="openDetail(history)">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1 text-truncate">{{ history.title }}</h6>
+        <small class="text-nowrap">{{ history.saved_at }}</small>
+      </div>
+      <p class="mb-1 text-muted text-truncate">{{ history.summary }}</p>
+      <div class="d-flex align-items-center gap-1 flex-wrap">
+        @for (tag of history.tags; track tag) {
+        <span class="badge text-bg-secondary">{{ tag }}</span>
+        }
+        @if (history.private) {
+        <span class="badge text-bg-warning">私有</span>
+        }
+      </div>
+    </button>
+    }
+  </div>
+  }
+  } @else {
+  <!-- 详情态 -->
+  @if (detailLoading) {
+  <div class="text-center my-3">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    加载中...
+  </div>
+  } @else {
+  <div class="history-detail">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ detail.title }}</h5>
+      <small class="text-nowrap">{{ detail.saved_at }}</small>
+    </div>
+    <p class="text-muted">{{ detail.summary }}</p>
+    <div class="d-flex align-items-center gap-1 flex-wrap mb-2">
+      @for (tag of detail.tags; track tag) {
+      <span class="badge text-bg-secondary">{{ tag }}</span>
+      }
+      @if (detail.private) {
+      <span class="badge text-bg-warning">私有</span>
+      }
+    </div>
+    <div class="history-content">
+      @if (detail.doc_type == 'Markdown') {
+      <markdown [data]="detail.content" [katex]="true"></markdown>
+      } @else {
+      <pre class="text-body mb-0">{{ detail.content }}</pre>
+      }
+    </div>
+  </div>
+  }
+  }
+</div>
+<div class="modal-footer">
+  @if (detail) {
+  <button type="button" class="btn btn-outline-secondary" [disabled]="detailLoading"
+    (click)="backToList()">返回列表</button>
+  <button type="button" class="btn btn-primary" [disabled]="rolling || detailLoading"
+    (click)="showConfirm()">
+    @if (rolling) {
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    回滚中...
+    } @else {
+    恢复到此版本
+    }
+  </button>
+  } @else {
+  <button type="button" class="btn btn-outline-secondary" [disabled]="loading"
+    (click)="activeModal.dismiss('Close click')">关闭</button>
+  }
+</div>
+
+<ng-template #confirmRollback let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">确认回滚？</h4>
+    <button type="button" class="btn-close" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    将把文章回滚到 <strong>{{ detail?.saved_at }}</strong> 保存的版本。
+    @if (unsavedChanges) {
+    <p class="text-danger mt-2 mb-0">警告：当前编辑器有未保存的修改，回滚后将被覆盖！</p>
+    }
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cancel click')">取消</button>
+    <button type="button" class="btn btn-primary" [disabled]="rolling" (click)="rollback(modal)">确认回滚</button>
+  </div>
+</ng-template>

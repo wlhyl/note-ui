@@ -1,0 +1,14 @@
+.history-list {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.history-content {
+  max-height: 50vh;
+  overflow: auto;
+  position: relative;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}

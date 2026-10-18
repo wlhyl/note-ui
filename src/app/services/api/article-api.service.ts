@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Article, ArticlePreview, PatchArticle } from '../../types/article';
+import { Article, ArticleHistoryDetail, ArticleHistoryPreview, ArticlePreview, PatchArticle } from '../../types/article';
 import { PageResponser } from '../../types/page';
 import { AuthenticationInfoService } from '../authentication/authentication-info.service';
 import { ENV_CONFIG } from '../../tokens/app-config.token';
@@ -139,6 +139,42 @@ export class ArticleApiService {
       headers: { token: this.user.token },
       body: articles,
     });
+  }
+
+  // 查询文章保存历史列表
+  public listArticleHistories(
+    id: number
+  ): Observable<Array<ArticleHistoryPreview>> {
+    return this.http.get<Array<ArticleHistoryPreview>>(
+      `${this.url}/articles/${id}/histories`,
+      {
+        headers: { token: this.user.token },
+      }
+    );
+  }
+
+  // 查询单条文章保存历史详情（含正文）
+  public getArticleHistoryDetail(
+    id: number,
+    historyId: number
+  ): Observable<ArticleHistoryDetail> {
+    return this.http.get<ArticleHistoryDetail>(
+      `${this.url}/articles/${id}/histories/${historyId}`,
+      {
+        headers: { token: this.user.token },
+      }
+    );
+  }
+
+  // 回滚文章到指定历史版本
+  public rollbackArticle(id: number, historyId: number): Observable<Article> {
+    return this.http.put<Article>(
+      `${this.url}/articles/${id}/histories/${historyId}`,
+      {},
+      {
+        headers: { token: this.user.token },
+      }
+    );
   }
 
   // 批量恢复article

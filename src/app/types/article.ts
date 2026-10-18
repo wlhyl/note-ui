@@ -54,6 +54,28 @@ export interface PatchArticle {
 }
 
 /**
+ * 文章保存历史列表项
+ */
+export interface ArticleHistoryPreview {
+  id: number;
+  article_id: number;
+  title: string;
+  summary: string;
+  tags: Array<string>;
+  private: boolean;
+  saved_at: string;
+}
+
+/**
+ * 文章保存历史详情，包含正文
+ */
+export interface ArticleHistoryDetail extends ArticleHistoryPreview {
+  content: string;
+  doc_type: DocType;
+  category_id: number;
+}
+
+/**
  * 文章排序项
  */
 export interface ArticleSortItem {
