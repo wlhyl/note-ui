@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-18
+
+### Added
+
+- 启用 KaTeX 数学公式渲染：文章详情页与编辑页预览区支持 `$...$` 行内公式和 `$$...$$` 块级公式
+- 新增依赖 `marked-katex-extension` 与 `katex`（显式声明，避免仅作为自动 peer 在重装时丢失）
+
+### Changed
+
+- `angular.json` 构建样式引入 `katex.min.css`
+- `provideMarkdown` 配置 KaTeX 选项：`throwOnError: false`（公式语法错误降级为红色提示），`output: 'html'`（规避 Angular 消毒器对 MathML 标签的过滤）
+
 ## [0.3.4] - 2026-10-18
 
 ### Fixed

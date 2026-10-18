@@ -46,7 +46,7 @@
     @if (preview) {
     <div class="preview" style="padding: 1rem; overflow:auto; position: relative;">
       @if (article.body.doc_type=='Markdown') {
-      <markdown [data]="article.body.content" style="height: 100%;"></markdown>
+      <markdown [data]="article.body.content" [katex]="true" style="height: 100%;"></markdown>
       }
       @if (article.body.doc_type=='Unknow') {
       <div style="height: 100%;">{{article.body.content}}</div>

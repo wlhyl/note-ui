@@ -10,11 +10,14 @@ import { ConfigService } from './services/config/config.service';
 import { SsrDataService } from './services/ssr/ssr-data.service';
 import { appInit } from './services/init/app-init';
 import { ENV_CONFIG,envConfig } from './tokens/app-config.token';
-import { provideMarkdown } from 'ngx-markdown';
+import { KATEX_OPTIONS, provideMarkdown } from 'ngx-markdown';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideMarkdown(),
+    provideMarkdown({
+      // output: 'html' 避免 MathML 标签被 Angular 消毒器剔除导致公式显示异常
+      katexOptions: { provide: KATEX_OPTIONS, useValue: { throwOnError: false, output: 'html' } },
+    }),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), provideClientHydration(withEventReplay(), withNoIncrementalHydration()),

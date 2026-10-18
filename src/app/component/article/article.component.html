@@ -58,7 +58,7 @@
   <div style="background-color: white; padding: 2em;">
     <!-- <markdown [data]="article.body.content"></markdown> -->
     @if (article.body.doc_type=='Markdown') {
-      <markdown [data]="article.body.content"></markdown>
+      <markdown [data]="article.body.content" [katex]="true"></markdown>
     }
     @if (article.body.doc_type=='Unknow') {
       <div>{{article.body.content}}></div>
