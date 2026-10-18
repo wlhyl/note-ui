@@ -37,7 +37,7 @@
 
 </div>
 <div class="edit">
-  <div style="display: flex; flex-direction :row;">
+  <div style="display: flex; flex-direction :row; flex-wrap: wrap;">
     <div [ngClass]="preview? 'preview' : 'nopreview' " style="padding: 1rem; overflow:auto; position: relative;">
       <code-editor [theme]="'dark'" [lineWrapping]="true" [languages]="supportedLanguages" language="markdown"
         [(ngModel)]="article.body.content" style="height: 100%;">

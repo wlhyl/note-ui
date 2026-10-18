@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-10-18
+
+### Fixed
+
+- 修复手机浏览器上编辑页保存按钮及底部内容不可见的问题（移除 `.user-layout` 的 `height: 100vh`，避免移动端地址栏/工具栏遮挡，高度改由 `position: fixed` 的 inset 决定）
+- 修复小屏幕下管理后台内容区域底部被裁剪、无法滚动到最后一部分内容的问题（`.main-area` 改用 `min-height: 0` 配合 flex 布局）
+- 修复小屏幕下编辑器与预览区横向溢出到页面外的问题（flex 容器启用 `flex-wrap: wrap`，预览区正常换行堆叠）
+
+### Changed
+
+- 页面语言声明改为中文（`index.html` 的 `<html lang>` 改为 `zh-CN`）
+
 ## [0.4.0] - 2026-10-18
 
 ### Added

@@ -4,7 +4,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 100vh;
+    // 不要设置 height: 100vh：移动端浏览器 100vh 包含地址栏/工具栏后面的区域，
+    // 会导致底部内容（如保存按钮）被浏览器工具栏遮挡。由 top/bottom inset 自动撑满可视区域。
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -44,7 +45,9 @@
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
-    height: 100%;
+    // 不能用 height: 100%：小屏下 .main-content 是纵向 flex，
+    // 侧边栏会占据部分高度，100% 会让滚动区底部被 .user-layout 的 overflow: hidden 裁掉
+    min-height: 0;
 }
 
 nav {
