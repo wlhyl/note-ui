@@ -142,6 +142,9 @@
     }
   </ng-template>
 </button>
+@if (lastSavedAt) {
+<span class="text-muted ms-2 small">上次保存：{{ lastSavedAt | date:'HH:mm:ss' }}</span>
+}
 
 @if (article.id > 0) {
 <button class="btn btn-outline-secondary ms-2" type="button" (click)="showHistory()">

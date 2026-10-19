@@ -1,5 +1,6 @@
 import {
   Component,
+  HostListener,
   inject,
   OnDestroy,
   // HostBinding,
@@ -9,7 +10,17 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { interval, lastValueFrom } from 'rxjs';
+import {
+  asyncScheduler,
+  debounceTime,
+  lastValueFrom,
+  merge,
+  Subject,
+  Subscription,
+  switchMap,
+  throttleTime,
+  timer,
+} from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
 import { Article, PatchArticle } from '../../types/article';
 import { Category, PatchCategory } from '../../types/category';
@@ -206,7 +217,22 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   // 自动保存
-  private observableRef;
+  private autoSaveSub: Subscription;
+
+  // 用户活动流：任何输入/选择/点击都会向其发送信号
+  private userActivity$ = new Subject<void>();
+
+  // 自动保存失败后的重试信号
+  private retry$ = new Subject<void>();
+
+  // 连续自动保存失败次数（用户一有输入即重置）
+  private autoSaveRetryCount = 0;
+
+  // 连续自动保存失败的最大重试次数，超过后停止自动重试，等待用户操作
+  private readonly maxAutoSaveRetries = 5;
+
+  // 上次保存成功的时间，用于界面提示
+  public lastSavedAt: Date | null = null;
 
   constructor(
     private api: ApiService,
@@ -215,21 +241,42 @@ export class EditComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private modalService: NgbModal
   ) {
-    // 设置自动保存
-    // 参考：https://stackoverflow.com/questions/44809224/how-to-make-an-http-call-every-2-minutes-with-rxjs
-    // this.observableRef = interval(3000).subscribe(
-    //   (x) => console.log(x) /* do something */
-    // );
-    this.observableRef = interval(this.configService.config.auto_save_interval * 1000).subscribe(
-      (x) => {
-        if (!this.isSaved && !this.saving && this.validateArticle().validated()) {
-          this.save();
-        }
-      }
-    );
+    // 输入停止 idle 秒后自动保存；持续输入时最长每 maxWait 秒强制保存一次，防止数据丢失
+    const idleMs = Math.max(this.configService.config.auto_save_interval, 3) * 1000;
+    const maxWaitMs = idleMs * 3;
+
+    this.autoSaveSub = merge(
+      // 输入停止检测：停止输入 idle 秒后触发一次
+      this.userActivity$.pipe(debounceTime(idleMs)),
+      // 最大等待上限：持续输入时每 maxWait 秒触发一次
+      this.userActivity$.pipe(
+        throttleTime(maxWaitMs, asyncScheduler, { leading: false, trailing: true })
+      ),
+      // 保存失败后延迟 idle 秒重试
+      this.retry$.pipe(switchMap(() => timer(idleMs)))
+    ).subscribe(() => this.tryAutoSave());
   }
+
+  // 监听整个文档的输入/选择/点击事件（CodeMirror、select、checkbox、textarea 均会触发），
+  // 不拆写 [(ngModel)]，避免 (ngModelChange) 覆盖香蕉框绑定的问题
+  @HostListener('document:input')
+  @HostListener('document:change')
+  @HostListener('document:click')
+  onUserActivity() {
+    this.autoSaveRetryCount = 0;
+    this.userActivity$.next();
+  }
+
   ngOnDestroy(): void {
-    this.observableRef.unsubscribe();
+    this.autoSaveSub.unsubscribe();
+  }
+
+  private tryAutoSave(): void {
+    // 已保存 / 保存中 / 校验不通过时跳过
+    if (this.isSaved || this.saving || !this.validateArticle().validated()) {
+      return;
+    }
+    this.save(true);
   }
 
   async ngOnInit() {
@@ -339,7 +386,7 @@ export class EditComponent implements OnInit, OnDestroy {
   //   }
   // }
 
-  save() {
+  save(autoSave = false) {
     const validated = this.validateArticle();
 
     if (!validated.validated()) {
@@ -352,23 +399,6 @@ export class EditComponent implements OnInit, OnDestroy {
 
     this.message = [];
 
-    if (this.article.title === '') {
-      this.titleError = '请输入文章标题';
-      return;
-    }
-    if (this.article.category.id === 0) {
-      this.categoryError = '请选择文章分类';
-      return;
-    }
-    // let tags = this.tags.filter((tag) => tag.checked).map((tag) => tag.id);
-    if (this.tags.length === 0) {
-      this.tagsError = '输入文章标签';
-      return;
-    }
-    if (this.article.summary === '') {
-      this.summaryError = '请输入文章摘要';
-      return;
-    }
     // let content_html = this.markdownService.parse(this.article.body.content);
     let article: PatchArticle = {
       id: this.article.id,
@@ -389,12 +419,15 @@ export class EditComponent implements OnInit, OnDestroy {
           next: (response) => {
             this.article = response;
             this.oldArticle = deepCopy(this.article);
+            this.lastSavedAt = new Date();
           },
-          error: () =>
+          error: () => {
             this.message.push({
               type: AlterEnum.DANGER,
               message: '更新文章失败！',
-            }),
+            });
+            this.scheduleAutoSaveRetry(autoSave);
+          },
         })
         .add(() => (this.saving = false));
     } else {
@@ -405,14 +438,26 @@ export class EditComponent implements OnInit, OnDestroy {
           next: (response) => {
             this.article = response;
             this.oldArticle = deepCopy(this.article);
+            this.lastSavedAt = new Date();
           },
-          error: () =>
+          error: () => {
             this.message.push({
               type: AlterEnum.DANGER,
               message: '新增文章失败！',
-            }),
+            });
+            this.scheduleAutoSaveRetry(autoSave);
+          },
         })
         .add(() => (this.saving = false));
+    }
+  }
+
+  // 自动保存失败后安排重试；连续失败超过上限则停止，等用户下次输入再恢复
+  private scheduleAutoSaveRetry(autoSave: boolean): void {
+    if (!autoSave) return;
+    this.autoSaveRetryCount++;
+    if (this.autoSaveRetryCount <= this.maxAutoSaveRetries) {
+      this.retry$.next();
     }
   }
 

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-10-19
+
+### Changed
+
+- 优化编辑页自动保存：由固定间隔轮询改为基于输入停止检测的事件驱动方案——停止输入 `auto_save_interval` 秒后保存，持续输入时最长每 3 倍间隔强制保存一次，避免频繁请求与句子中途保存；自动保存失败后有限次（5 次）重试，用户再次输入即重置重试计数；保存成功后显示"上次保存"时间；移除 `save()` 中与 `validateArticle()` 重复的校验代码
+
 ## [0.5.0] - 2026-10-19
 
 ### Added
